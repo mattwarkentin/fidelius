@@ -1,3 +1,3 @@
-get_mithril_file <- function(file) {
-  system.file(file, package = 'mithril')
+get_fidelius_file <- function(file) {
+  system.file(file, package = 'fidelius')
 }

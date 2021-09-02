@@ -73,7 +73,7 @@ fidelius <- function(input, output = NULL, password, ...) {
 }
 
 insert_content <- function(path, content) {
-  index_html <- get_mithril_file('mithril.html')
+  index_html <- get_fidelius_file('fidelius.html')
   template <- readr::read_file(index_html)
   filled <- whisker::whisker.render(
     template = template,
