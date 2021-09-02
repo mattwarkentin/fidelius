@@ -1,0 +1,23 @@
+Package: fidelius
+Title: Secure Encryption and Decryption of HTML Files
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Matthew T.",
+           family = "Warkentin",
+           role = c("aut", "cre"),
+           email = "warkentin@lunenfeld.ca",
+           comment = c(ORCID = "0000-0001-8730-3511"))
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports:
+  fs,
+  getPass,
+  readr,
+  rlang,
+  rmarkdown,
+  sodium,
+  whisker
