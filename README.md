@@ -41,24 +41,24 @@ feel free to file an
 ## Usage
 
 You will generally only use a single function from this package, the
-eponymously named `fidelius()` function. As its main input, this
-function will accept an R Markdown file, that can be rendered to any
-HTML format, or an existing HTML file.
+`charm()` function. As its main input, this function will accept an R
+Markdown file, that can be rendered to any HTML format, or an existing
+HTML file.
 
 ``` r
 library(fidelius)
 ```
 
-When calling `fidelius()`, you must either supply the password in the
-function call, like `fidelius("index.Rmd", password = "pw1234!")`, or,
-if `password` is not supplied, you will be prompted to supply the
-password in a pop-up (only if the function is invoked in an interactive
-`R` session). The password can be any set of characters that can be
-hashed using the `sodium::sha256()` algorithm.
+When calling `charm()`, you must either supply the password in the
+function call, like `charm("index.Rmd", password = "pw1234!")`, or, if
+`password` is not supplied, you will be prompted to supply the password
+in a pop-up (only if the function is invoked in an interactive `R`
+session). The password can be any set of characters that can be hashed
+using the `sodium::sha256()` algorithm.
 
 ``` r
 # To supply the password interactively
-fidelius("index.Rmd")
+charm("index.Rmd")
 ```
 
 The HTML document produced by `rmarkdown::render("index.Rmd")` is saved
@@ -72,7 +72,7 @@ encrypted content, the nonce, and the machinery to perform secure
 in-browser decryption, if provided with the correct password. By
 default, the name of the output file is the name of the input file with
 an HTML extension, but can be configured using the `output` argument to
-`fidelius()`.
+`charm()`.
 
 This package drew heavy inspiration from the
 [`staticrypt`](https://github.com/robinmoisson/staticrypt),

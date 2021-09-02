@@ -11,7 +11,7 @@
 #'
 #' @export
 
-fidelius <- function(input, output = NULL, password, ...) {
+charm <- function(input, output = NULL, password, ...) {
   input <- fs::path_real(input)
   input_ext <- tolower(fs::path_ext(input))
 
