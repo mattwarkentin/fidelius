@@ -7,15 +7,18 @@ Authors@R:
            role = c("aut", "cre"),
            email = "warkentin@lunenfeld.ca",
            comment = c(ORCID = "0000-0001-8730-3511"))
-Description: What the package does (one paragraph).
+Description: This package provides a simple interface to create
+  secure, encrypted, password-protected static HTML documents, and creates
+  self-contained HTML documents that contain the encrypted content
+  and machinery for secure in-browser decryption.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports:
+  askpass,
   fs,
-  getPass,
   readr,
   rlang,
   rmarkdown,

@@ -36,8 +36,7 @@ fidelius <- function(input, output = NULL, password, ...) {
   }
 
   if (missing(password) & interactive()) {
-    password <- getPass::getPass("Please enter your password",
-                                 noblank = TRUE)
+    password <- askpass::askpass("Please enter your password")
   } else {
     rlang::abort("`password` is missing and must be supplied.")
   }
