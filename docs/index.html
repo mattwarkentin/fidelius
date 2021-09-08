@@ -70,12 +70,13 @@
 <blockquote>
 <p>“An immensely complex spell involving the magical concealment of a secret inside a single, living soul. The information is hidden inside the chosen person, or Secret-Keeper, and is henceforth impossible to find - unless, of course, the Secret-Keeper chooses to divulge it.”</p>
 </blockquote>
-<p>The goal of <code>fidelius</code> is to provide a simple way to encrypt and password-protect your static HTML files and provide lightweight, secure, and self-contained in-browser decryption.</p>
+<p>The goal of <code>fidelius</code> is to provide a simple way to encrypt and password-protect your static HTML files and support portable, secure, and self-contained in-browser decryption.</p>
 <p>This package sits on the shoulders of the cryptography library, <code>sodium</code>, to provide secure methods for encryption, decryption, and password hashing - both by it’s <code>R</code> interface via <a href="https://github.com/jeroen/sodium"><code>sodium</code></a> and its JavaScript API for in-browser decryption.</p>
+<p>This package drew inspiration from the <a href="https://github.com/robinmoisson/staticrypt"><code>staticrypt</code></a>, <a href="https://github.com/favstats/rmdprotectr"><code>rmdprotectr</code></a>, and <a href="https://github.com/dirkschumacher/encryptedRmd"><code>encryptedRmd</code></a> projects.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>Currently, you can only the development version of this package from GitHub by running the following command:</p>
+<p>Currently, you can only install the development version of this package from GitHub by running the following command:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"mattwarkentin/fidelius"</span><span class="op">)</span></code></pre></div>
 <p>If you notice any bugs or would like to request new features, please feel free to file an <a href="https://github.com/mattwarkentin/fidelius/issues">Issue</a>.</p>
@@ -83,21 +84,24 @@
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p>You will generally only use a single function from this package, the <code><a href="reference/charm.html">charm()</a></code> function. As its main input, this function will accept an R Markdown file, that can be rendered to any HTML format, or an existing HTML file.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">fidelius</span><span class="op">)</span></code></pre></div>
+<p>You will generally only use a single function from this package, the <code><a href="reference/charm.html">charm()</a></code> function. As its main input, this function accepts an R Markdown file, that must be rendered to an HTML format, or an existing HTML file.</p>
 <p>When calling <code><a href="reference/charm.html">charm()</a></code>, you must either supply the password in the function call, like <code><a href="reference/charm.html">charm("index.Rmd", password = "pw1234!")</a></code>, or, if <code>password</code> is not supplied, you will be prompted to supply the password in a pop-up (only if the function is invoked in an interactive <code>R</code> session). The password can be any set of characters that can be hashed using the <code><a href="https://rdrr.io/pkg/sodium/man/hash.html">sodium::sha256()</a></code> algorithm.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># To supply the password interactively</span>
 <span class="fu"><a href="reference/charm.html">charm</a></span><span class="op">(</span><span class="st">"index.Rmd"</span><span class="op">)</span></code></pre></div>
 <p>The HTML document produced by <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html">rmarkdown::render("index.Rmd")</a></code> is saved to a temporary directory (which is destroyed when the <code>R</code> session ends), and then read into <code>R</code> and securely encrypted using <code><a href="https://rdrr.io/pkg/sodium/man/symmetric.html">sodium::data_encrypt()</a></code>, based on the user-provided password and a nonce.</p>
-<p>The output file is a self-contained HTML document, that contains the encrypted content, the nonce, and the machinery to perform secure in-browser decryption, if provided with the correct password. By default, the name of the output file is the name of the input file with an HTML extension, but can be configured using the <code>output</code> argument to <code><a href="reference/charm.html">charm()</a></code>.</p>
-<p>This package drew heavy inspiration from the <a href="https://github.com/robinmoisson/staticrypt"><code>staticrypt</code></a>, <a href="https://github.com/favstats/rmdprotectr"><code>rmdprotectr</code></a>, and <a href="https://github.com/dirkschumacher/encryptedRmd"><code>encryptedRmd</code></a> projects.</p>
+<p>The output file is a self-contained HTML document that contains the encrypted content, the nonce, and the machinery to perform secure in-browser decryption. The correct password is required for decryption and to reveal the hidden content. Since the HTML document is entirely self-contained, it can be hosted on any static site hosting service (e.g. GitHub Pages) or shared directly with others (e.g. via email).</p>
+<p>By default, the name of the output file is the name of the input file with an HTML extension, but can be configured using the <code>output</code> argument to <code><a href="reference/charm.html">charm()</a></code>.</p>
 </div>
-<div id="themeing" class="section level2">
+<div id="password-hint" class="section level2">
 <h2 class="hasAnchor">
-<a href="#themeing" class="anchor"></a>Themeing</h2>
-<p>TODO</p>
+<a href="#password-hint" class="anchor"></a>Password Hint</h2>
+<p>Optionally, you may wish to provide a hint to those trying to gain access to your document using the <code>hint</code> argument:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/charm.html">charm</a></span><span class="op">(</span><span class="st">"index.Rmd"</span>, password <span class="op">=</span> <span class="st">"pw1234!"</span>, hint <span class="op">=</span> <span class="st">"A very bad password!"</span><span class="op">)</span></code></pre></div>
+<p>This bundles the lightweight <a href="https://github.com/ghosh/Micromodal"><code>Micromodal</code></a> JavaScript library to provide a simple modal pop-up containing your password hint.</p>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
