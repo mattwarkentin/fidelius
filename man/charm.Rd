@@ -4,14 +4,16 @@
 \alias{charm}
 \title{Encrypted HTML Documents}
 \usage{
-charm(input, output = NULL, password, ...)
+charm(input, password, hint, output = NULL, ...)
 }
 \arguments{
 \item{input}{Path to an R Markdown or HTML file.}
 
-\item{output}{Name of output file.}
-
 \item{password}{Password to unlock file.}
+
+\item{hint}{Public password hint.}
+
+\item{output}{Name of output file.}
 
 \item{...}{Arguments passed on to \code{rmarkdown::render()}.}
 }

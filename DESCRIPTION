@@ -18,7 +18,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports:
   askpass,
+  base64enc,
   fs,
+  htmltools,
   readr,
   rlang,
   rmarkdown,
