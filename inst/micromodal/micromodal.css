@@ -3,9 +3,9 @@
 \**************************/
 
 .modal {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-  'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-  'Helvetica Neue', sans-serif;
+  font-family: var(--font-family), -apple-system, BlinkMacSystemFont, 
+    'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 
+    'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .modal__overlay {
@@ -14,14 +14,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.6);
+  background: var(--modal-overlay);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .modal__container {
-  background-color: #fff;
+  background-color: var(--modal-box-color);
   padding: 15px;
   max-width: 500px;
   max-height: 100vh;
@@ -40,10 +40,10 @@
 .modal__title {
   margin-top: 0;
   margin-bottom: 0;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.25rem;
   line-height: 1.25;
-  color: #1c6d36;
+  color: var(--modal-title-color);
   box-sizing: border-box;
 }
 
@@ -63,7 +63,7 @@
   margin-top: 1rem;
   margin-bottom: 0rem;
   line-height: 1.5;
-  color: rgba(0,0,0,.8);
+  color: var(--modal-font-color);
 }
 
 /**************************\
