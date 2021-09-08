@@ -13,7 +13,7 @@ charm(input, password, hint, output = NULL, ...)
 
 \item{hint}{Public password hint.}
 
-\item{output}{Name of output file.}
+\item{output}{Name of the output file.}
 
 \item{...}{Arguments passed on to \code{rmarkdown::render()}.}
 }

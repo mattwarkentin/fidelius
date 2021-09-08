@@ -25,6 +25,12 @@ password hashing - both by it’s `R` interface via
 [`sodium`](https://github.com/jeroen/sodium) and its JavaScript API for
 in-browser decryption.
 
+This package drew inspiration from the
+[`staticrypt`](https://github.com/robinmoisson/staticrypt),
+[`rmdprotectr`](https://github.com/favstats/rmdprotectr), and
+[`encryptedRmd`](https://github.com/dirkschumacher/encryptedRmd)
+projects.
+
 ## Installation
 
 Currently, you can only install the development version of this package
@@ -90,12 +96,6 @@ charm("index.Rmd", password = "pw1234!", hint = "A very bad password!")
 This bundles the lightweight
 [`Micromodal`](https://github.com/ghosh/Micromodal) JavaScript library
 to provide a simple modal pop-up containing your password hint.
-
-This package drew inspiration from the
-[`staticrypt`](https://github.com/robinmoisson/staticrypt),
-[`rmdprotectr`](https://github.com/favstats/rmdprotectr), and
-[`encryptedRmd`](https://github.com/dirkschumacher/encryptedRmd)
-projects.
 
 ## Code of Conduct
 

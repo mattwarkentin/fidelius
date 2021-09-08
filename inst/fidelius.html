@@ -44,8 +44,10 @@
         text-align: center;
       }
       .fidelius__content__heading {
+        display: inline-block;
+        vertical-align: middle;
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 400;
         margin: 0 0 12px;
         line-height: 1;
       }
@@ -75,7 +77,7 @@
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
           'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
           'Helvetica Neue', sans-serif;
-        font-weight: 500;
+        font-weight: 400;
         font-size: 16px;
         width: 100%;
       }
@@ -83,21 +85,12 @@
         background-color: #1c6d36;
       }
 
-      .fidelius__heading__div {
-
-      }
-
-      .fidelius__heading__div > svg {
+      .fidelius__icon__hint {
         cursor: pointer;
         display: inline-block;
         vertical-align: middle;
         margin: 0 0 12px;
         line-height: 1;
-      }
-
-      .fidelius__heading__div > h1 {
-        display: inline-block;
-        vertical-align: middle;
       }
 
       @keyframes headShake {
@@ -130,6 +123,22 @@
         animation: headShake 500ms ease-in-out 0ms 1 forwards;
         animation-name: headShake;
       }
+
+      .fidelius__eye {
+        display: inline-block;
+        float: right;
+        margin-right: 10px;
+        margin-top: -46px;
+        position: relative;
+      }
+
+      .fidelius__eye_open, .fidelius__eye_closed {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+        z-index: 2;
+      }
+
       {{{fidelius__micromodal__css}}}
     </style>
   </head>
@@ -139,12 +148,15 @@
         <div class="fidelius__heading__div">
           <h1 class="fidelius__content__heading">PLEASE ENTER THE PASSWORD </h1>
         </div>
-        <input
+        <div class="fidelius__password__div">
+          <input
           class="fidelius__content__input"
           data-id="password"
           type="password"
           placeholder=""
-        />
+          />
+          <div class="fidelius__eye"><svg xmlns="http://www.w3.org/2000/svg" class="fidelius__eye_open" width="192" height="192" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><path d="M128,55.99219C48,55.99219,16,128,16,128s32,71.99219,112,71.99219S240,128,240,128,208,55.99219,128,55.99219Z" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><circle cx="128" cy="128.00061" r="40" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></circle></svg></div>
+        </div>
         <button data-id="button" type="button" class="fidelius__content__btn">
           SUBMIT
         </button>
@@ -168,18 +180,35 @@
         if (hint !== "") {
           let heading_div = document.querySelector(".fidelius__heading__div")
           heading_div = heading_div.insertAdjacentHTML('beforeend', fidelius__icons.hint)
-
-          let modal_hint_content = document.querySelector(".modal__content > p")
-          modal_hint_content.innerText = hint
-
-          MicroModal.init();
+          let modal__content__hint = document.querySelector(".modal__content__hint")
+          modal__content__hint.innerText = hint
+          MicroModal.init()
         }
 
-        let submit = document.querySelector('.fidelius__content__btn')
-        let input_box = document.querySelector('.fidelius__content')
+        let submit_btn = document.querySelector('.fidelius__content__btn')
         let input = document.querySelector('.fidelius__content__input')
+        let content_box = document.querySelector('.fidelius__content')
 
-        const decrypter = () => {
+        function toggle_password_show () {
+          let show_icon = document.querySelector('.fidelius__eye > svg')
+          if (input.type === "password") {
+            input.type = "text"
+            new_icon = document.createRange().createContextualFragment(fidelius__icons.eye_slash)
+            show_icon.replaceWith(new_icon)
+            input.focus()
+          } else {
+            input.type = "password"
+            new_icon = document.createRange().createContextualFragment(fidelius__icons.eye)
+            show_icon.replaceWith(new_icon)
+            input.focus()
+          }
+        }
+
+        let showpass = document.querySelector('.fidelius__eye')
+        showpass.addEventListener('click', toggle_password_show)
+        showpass.addEventListener('touchend', toggle_password_show)
+
+        function decrypter () {
           // Get the password and hash it
           let password = input.value
           let password_hash = sodium.crypto_hash_sha256(password)
@@ -195,19 +224,18 @@
             document.write(html_text)
             document.close()
           } catch (error) {
-            // change to show incorrect pass
-            input_box.classList.add("fidelius__headShake")
+            // Incorrect password
+            content_box.classList.add("fidelius__headShake")
             setTimeout(function() {
-              input_box.classList.remove("fidelius__headShake");
+              content_box.classList.remove("fidelius__headShake");
             }, 250);
             input.select()
             input.focus()
           }
         }
 
-        submit.addEventListener('click', decrypter)
-        submit.addEventListener('touchend', decrypter)
-
+        submit_btn.addEventListener('click', decrypter)
+        submit_btn.addEventListener('touchend', decrypter)
         document.addEventListener('keyup', (e) => {
           if (e.keyCode === 13) {
             decrypter()
@@ -217,22 +245,25 @@
 
       var fidelius__icons = {
         locked:
-          "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' fill='%23000000' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'%3E%3C/rect%3E%3Ccircle cx='127.99414' cy='140' r='20' fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'%3E%3C/circle%3E%3Cline x1='127.99414' y1='160' x2='127.99414' y2='184' fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'%3E%3C/line%3E%3Crect x='39.99414' y='88' width='176' height='128' rx='8' stroke-width='16' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' fill='none'%3E%3C/rect%3E%3Cpath d='M91.99414,88V52a36,36,0,1,1,72,0V88' fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'%3E%3C/path%3E%3C/svg%3E",
+          "data:image/svg+xml,%3Csvg class='fidelius__icon__locked' xmlns='http://www.w3.org/2000/svg' width='192' height='192' fill='%23000000' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'%3E%3C/rect%3E%3Ccircle cx='127.99414' cy='140' r='20' fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'%3E%3C/circle%3E%3Cline x1='127.99414' y1='160' x2='127.99414' y2='184' fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'%3E%3C/line%3E%3Crect x='39.99414' y='88' width='176' height='128' rx='8' stroke-width='16' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' fill='none'%3E%3C/rect%3E%3Cpath d='M91.99414,88V52a36,36,0,1,1,72,0V88' fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'%3E%3C/path%3E%3C/svg%3E",
         opened:
-          "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' fill='%23000000' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'%3E%3C/rect%3E%3Ccircle cx='127.99414' cy='140' r='20' fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'%3E%3C/circle%3E%3Cline x1='127.99414' y1='160' x2='127.99414' y2='184' fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'%3E%3C/line%3E%3Crect x='39.99414' y='88' width='176' height='128' rx='8' stroke-width='16' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' fill='none'%3E%3C/rect%3E%3Cpath d='M91.99414,88V52a36,36,0,1,1,72,0' fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'%3E%3C/path%3E%3C/svg%3E",
+          "data:image/svg+xml,%3Csvg class='fidelius__icon__opened' xmlns='http://www.w3.org/2000/svg' width='192' height='192' fill='%23000000' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'%3E%3C/rect%3E%3Ccircle cx='127.99414' cy='140' r='20' fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'%3E%3C/circle%3E%3Cline x1='127.99414' y1='160' x2='127.99414' y2='184' fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'%3E%3C/line%3E%3Crect x='39.99414' y='88' width='176' height='128' rx='8' stroke-width='16' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' fill='none'%3E%3C/rect%3E%3Cpath d='M91.99414,88V52a36,36,0,1,1,72,0' fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'%3E%3C/path%3E%3C/svg%3E",
         hint:
-          '<svg data-micromodal-trigger="fidelius-modal" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><circle cx="128" cy="128" r="96" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></circle><circle cx="128" cy="180" r="12"></circle><path d="M127.9995,144.0045v-8a28,28,0,1,0-28-28" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path></svg>'
+          '<svg data-micromodal-trigger="fidelius-modal" class="fidelius__icon__hint" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><circle cx="128" cy="128" r="96" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></circle><circle cx="128" cy="180" r="12"></circle><path d="M127.9995,144.0045v-8a28,28,0,1,0-28-28" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path></svg>',
+        eye:
+          '<svg xmlns="http://www.w3.org/2000/svg" class="fidelius__eye_open" width="192" height="192" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><path d="M128,55.99219C48,55.99219,16,128,16,128s32,71.99219,112,71.99219S240,128,240,128,208,55.99219,128,55.99219Z" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><circle cx="128" cy="128.00061" r="40" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></circle></svg>',
+        eye_slash:
+          '<svg xmlns="http://www.w3.org/2000/svg" class="fidelius__eye_closed" width="192" height="192" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><line x1="48" y1="40.00122" x2="208" y2="216.00122" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><path d="M154.9071,157.599a40.00028,40.00028,0,0,1-53.8142-59.19562" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M73.99446,68.59479C33.22519,89.24034,16,128.00122,16,128.00122s32,71.99219,112,71.99219a118.0238,118.0238,0,0,0,53.99756-12.59461" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M208.60953,169.10059C230.41132,149.57342,240,128.00122,240,128.00122S208,55.99341,128,55.99341a125.31923,125.31923,0,0,0-20.68221,1.68414" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M135.52737,88.709a40.02411,40.02411,0,0,1,32.29785,35.52874" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path></svg>'
       }
 
-      function create_favicon_link (state) {
-        var link = document.createElement('link');
-        link.rel = 'icon';
-        link.type = 'image/x-icon';
+      function create_favicon (state) {
+        let link = document.createElement('link')
+        link.rel = 'icon'
+        link.type = 'image/x-icon'
         link.href = fidelius__icons[state]
-        document.getElementsByTagName('head')[0].appendChild(link);
-        return link
+        document.getElementsByTagName('head')[0].appendChild(link)
       }
-      create_favicon_link('locked')
+      create_favicon('locked')
     </script>
     {{{fidelius__micromodal__html}}}
   </body>

@@ -5,7 +5,7 @@
 #' @param input Path to an R Markdown or HTML file.
 #' @param password Password to unlock file.
 #' @param hint Public password hint.
-#' @param output Name of output file.
+#' @param output Name of the output file.
 #' @param ... Arguments passed on to `rmarkdown::render()`.
 #'
 #' @return `input`, invisibly.
@@ -53,6 +53,7 @@ charm <- function(input, password, hint, output = NULL, ...) {
     rmarkdown::render(
       input = input,
       output_file = file_to_encrypt,
+      intermediates_dir = tempdir(),
       ...
     )
   } else {
