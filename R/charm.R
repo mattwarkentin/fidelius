@@ -6,13 +6,21 @@
 #' @param password Password to unlock file.
 #' @param hint Public password hint.
 #' @param output Name of the output file.
+#' @param style Object returned from `stylize()`.
 #' @param ... Arguments passed on to `rmarkdown::render()`.
 #'
 #' @return `input`, invisibly.
 #'
 #' @export
 
-charm <- function(input, password, hint, output = NULL, ...) {
+charm <- function(
+  input,
+  password,
+  hint,
+  output = NULL,
+  style = stylize(),
+  ...
+) {
   input <- fs::path_real(input)
   input_ext <- tolower(fs::path_ext(input))
 
@@ -22,6 +30,10 @@ charm <- function(input, password, hint, output = NULL, ...) {
              "an HTML file (`.html`).")
     )
   }
+
+  stopifnot(
+    "`style` must be an object returned from `stylize()`." = inherits(style, 'fidelius_styling')
+  )
 
   needToRender <- switch(input_ext,
     'rmd' = TRUE,
@@ -84,6 +96,8 @@ charm <- function(input, password, hint, output = NULL, ...) {
     content$fidelius__micromodal__html <- micromodal_html
     content$fidelius__hint <- hint
   }
+
+  content <- c(content, style)
 
   filled_template <- insert_content(content)
 

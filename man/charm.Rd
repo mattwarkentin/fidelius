@@ -4,7 +4,7 @@
 \alias{charm}
 \title{Encrypted HTML Documents}
 \usage{
-charm(input, password, hint, output = NULL, ...)
+charm(input, password, hint, output = NULL, style = stylize(), ...)
 }
 \arguments{
 \item{input}{Path to an R Markdown or HTML file.}
@@ -14,6 +14,8 @@ charm(input, password, hint, output = NULL, ...)
 \item{hint}{Public password hint.}
 
 \item{output}{Name of the output file.}
+
+\item{style}{Object returned from \code{stylize()}.}
 
 \item{...}{Arguments passed on to \code{rmarkdown::render()}.}
 }
