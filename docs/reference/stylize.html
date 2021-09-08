@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Encrypted HTML Documents — charm • fidelius</title>
+<title>Stylize Landing Page — stylize • fidelius</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Encrypted HTML Documents — charm" />
-<meta property="og:description" content="Encrypt and password protect an HTML document." />
+<meta property="og:title" content="Stylize Landing Page — stylize" />
+<meta property="og:description" content="Use this to style the appearance of the landing page
+for the password-protected HTML file." />
 
 
 
@@ -103,50 +104,154 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Encrypted HTML Documents</h1>
+    <h1>Stylize Landing Page</h1>
     
-    <div class="hidden name"><code>charm.Rd</code></div>
+    <div class="hidden name"><code>stylize.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Encrypt and password protect an HTML document.</p>
+    <p>Use this to style the appearance of the landing page
+for the password-protected HTML file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>charm</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>password</span>, <span class='va'>hint</span>, output <span class='op'>=</span> <span class='cn'>NULL</span>, style <span class='op'>=</span> <span class='fu'><a href='stylize.html'>stylize</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>stylize</span><span class='op'>(</span>
+  header_text <span class='op'>=</span> <span class='st'>"PLEASE ENTER THE PASSWORD"</span>,
+  placeholder_text <span class='op'>=</span> <span class='st'>""</span>,
+  button_text <span class='op'>=</span> <span class='st'>"SUBMIT"</span>,
+  font_family <span class='op'>=</span> <span class='st'>"-apple-system"</span>,
+  font_size <span class='op'>=</span> <span class='st'>"16px"</span>,
+  title_color <span class='op'>=</span> <span class='st'>"#2d3737"</span>,
+  background_color <span class='op'>=</span> <span class='st'>"#f2f2f2"</span>,
+  box_color <span class='op'>=</span> <span class='st'>"#ffffff"</span>,
+  btn_font_color <span class='op'>=</span> <span class='st'>"#ffffff"</span>,
+  btn_bg_color <span class='op'>=</span> <span class='st'>"#228843"</span>,
+  btn_hover_color <span class='op'>=</span> <span class='st'>"#1c6d36"</span>,
+  modal_overlay <span class='op'>=</span> <span class='st'>"rgba(0, 0, 0, 0.6)"</span>,
+  modal_box_color <span class='op'>=</span> <span class='st'>"#ffffff"</span>,
+  modal_title_color <span class='op'>=</span> <span class='st'>"#1c6d36"</span>,
+  modal_font_color <span class='op'>=</span> <span class='st'>"rgba(0, 0, 0, 0.8)"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>Path to an R Markdown or HTML file.</p></td>
+      <th>header_text</th>
+      <td><p>Header text.</p></td>
     </tr>
     <tr>
-      <th>password</th>
-      <td><p>Password to unlock file.</p></td>
+      <th>placeholder_text</th>
+      <td><p>Password input placeholder text.</p></td>
     </tr>
     <tr>
-      <th>hint</th>
-      <td><p>Public password hint.</p></td>
+      <th>button_text</th>
+      <td><p>Button text.</p></td>
     </tr>
     <tr>
-      <th>output</th>
-      <td><p>Name of the output file.</p></td>
+      <th>font_family</th>
+      <td><p>Font family.</p></td>
     </tr>
     <tr>
-      <th>style</th>
-      <td><p>Object returned from <code><a href='stylize.html'>stylize()</a></code>.</p></td>
+      <th>font_size</th>
+      <td><p>Font size.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Arguments passed on to <code><a href='https://pkgs.rstudio.com/rmarkdown/reference/render.html'>rmarkdown::render()</a></code>.</p></td>
+      <th>title_color</th>
+      <td><p>Title font color.</p></td>
+    </tr>
+    <tr>
+      <th>background_color</th>
+      <td><p>Background color.</p></td>
+    </tr>
+    <tr>
+      <th>box_color</th>
+      <td><p>Box color.</p></td>
+    </tr>
+    <tr>
+      <th>btn_font_color</th>
+      <td><p>Button font color.</p></td>
+    </tr>
+    <tr>
+      <th>btn_bg_color</th>
+      <td><p>Button background color.</p></td>
+    </tr>
+    <tr>
+      <th>btn_hover_color</th>
+      <td><p>Button hover color.</p></td>
+    </tr>
+    <tr>
+      <th>modal_overlay</th>
+      <td><p>Modal overlay color.</p></td>
+    </tr>
+    <tr>
+      <th>modal_box_color</th>
+      <td><p>Modal box color.</p></td>
+    </tr>
+    <tr>
+      <th>modal_title_color</th>
+      <td><p>Modal title font color.</p></td>
+    </tr>
+    <tr>
+      <th>modal_font_color</th>
+      <td><p>Modal text font color.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>input</code>, invisibly.</p>
+    <p>A list with class <code>fidelius_styling</code>.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='fu'>stylize</span><span class='op'>(</span>font_family <span class='op'>=</span> <span class='st'>"Times"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $header_text
+#&gt; [1] "PLEASE ENTER THE PASSWORD"
+#&gt; 
+#&gt; $placeholder_text
+#&gt; [1] ""
+#&gt; 
+#&gt; $button_text
+#&gt; [1] "SUBMIT"
+#&gt; 
+#&gt; $font_family
+#&gt; [1] "Times"
+#&gt; 
+#&gt; $font_size
+#&gt; [1] "16px"
+#&gt; 
+#&gt; $title_color
+#&gt; [1] "#2d3737"
+#&gt; 
+#&gt; $background_color
+#&gt; [1] "#f2f2f2"
+#&gt; 
+#&gt; $box_color
+#&gt; [1] "#ffffff"
+#&gt; 
+#&gt; $btn_font_color
+#&gt; [1] "#ffffff"
+#&gt; 
+#&gt; $btn_bg_color
+#&gt; [1] "#228843"
+#&gt; 
+#&gt; $btn_hover_color
+#&gt; [1] "#1c6d36"
+#&gt; 
+#&gt; $modal_overlay
+#&gt; [1] "rgba(0, 0, 0, 0.6)"
+#&gt; 
+#&gt; $modal_box_color
+#&gt; [1] "#ffffff"
+#&gt; 
+#&gt; $modal_title_color
+#&gt; [1] "#1c6d36"
+#&gt; 
+#&gt; $modal_font_color
+#&gt; [1] "rgba(0, 0, 0, 0.8)"
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "fidelius_styling"</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
