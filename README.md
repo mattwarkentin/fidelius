@@ -16,7 +16,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 > find - unless, of course, the Secret-Keeper chooses to divulge it.”
 
 The goal of `fidelius` is to provide a simple way to encrypt and
-password-protect your static HTML files and provide lightweight, secure,
+password-protect your static HTML files and support portable, secure,
 and self-contained in-browser decryption.
 
 This package sits on the shoulders of the cryptography library,
@@ -27,8 +27,8 @@ in-browser decryption.
 
 ## Installation
 
-Currently, you can only the development version of this package from
-GitHub by running the following command:
+Currently, you can only install the development version of this package
+from GitHub by running the following command:
 
 ``` r
 remotes::install_github("mattwarkentin/fidelius")
@@ -40,14 +40,14 @@ feel free to file an
 
 ## Usage
 
-You will generally only use a single function from this package, the
-`charm()` function. As its main input, this function will accept an R
-Markdown file, that can be rendered to any HTML format, or an existing
-HTML file.
-
 ``` r
 library(fidelius)
 ```
+
+You will generally only use a single function from this package, the
+`charm()` function. As its main input, this function accepts an R
+Markdown file, that must be rendered to an HTML format, or an existing
+HTML file.
 
 When calling `charm()`, you must either supply the password in the
 function call, like `charm("index.Rmd", password = "pw1234!")`, or, if
@@ -67,22 +67,35 @@ and then read into `R` and securely encrypted using
 `sodium::data_encrypt()`, based on the user-provided password and a
 nonce.
 
-The output file is a self-contained HTML document, that contains the
+The output file is a self-contained HTML document that contains the
 encrypted content, the nonce, and the machinery to perform secure
-in-browser decryption, if provided with the correct password. By
-default, the name of the output file is the name of the input file with
-an HTML extension, but can be configured using the `output` argument to
-`charm()`.
+in-browser decryption. The correct password is required for decryption
+and to reveal the hidden content. Since the HTML document is entirely
+self-contained, it can be hosted on any static site hosting service
+(e.g. GitHub Pages) or shared directly with others (e.g. via email).
 
-This package drew heavy inspiration from the
+By default, the name of the output file is the name of the input file
+with an HTML extension, but can be configured using the `output`
+argument to `charm()`.
+
+## Password Hint
+
+Optionally, you may wish to provide a hint to those trying to gain
+access to your document using the `hint` argument:
+
+``` r
+charm("index.Rmd", password = "pw1234!", hint = "A very bad password!")
+```
+
+This bundles the lightweight
+[`Micromodal`](https://github.com/ghosh/Micromodal) JavaScript library
+to provide a simple modal pop-up containing your password hint.
+
+This package drew inspiration from the
 [`staticrypt`](https://github.com/robinmoisson/staticrypt),
 [`rmdprotectr`](https://github.com/favstats/rmdprotectr), and
 [`encryptedRmd`](https://github.com/dirkschumacher/encryptedRmd)
 projects.
-
-## Themeing
-
-TODO
 
 ## Code of Conduct
 
