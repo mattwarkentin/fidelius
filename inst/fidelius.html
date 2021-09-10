@@ -223,7 +223,7 @@
         function decrypter () {
           // Get the password and hash it
           let password = input.value
-          let password_hash = sodium.crypto_hash_sha256(password)
+          let password_hash = sodium.crypto_generichash(32, sodium.from_string(password))
 
           try {
             // Try the password and catch the error to throw "incorrect pass"

@@ -4,7 +4,15 @@
 \alias{charm}
 \title{Encrypted HTML Documents}
 \usage{
-charm(input, password, hint, output = NULL, style = stylize(), ...)
+charm(
+  input,
+  password,
+  hint,
+  output = NULL,
+  style = stylize(),
+  bundle = FALSE,
+  ...
+)
 }
 \arguments{
 \item{input}{Path to an R Markdown or HTML file.}
@@ -17,6 +25,9 @@ charm(input, password, hint, output = NULL, style = stylize(), ...)
 
 \item{style}{Object returned from \code{stylize()}.}
 
+\item{bundle}{Logical. Should all of the decryption machinery and
+dependencies be bundled into the HTML document? Default is \code{FALSE}.}
+
 \item{...}{Arguments passed on to \code{rmarkdown::render()}.}
 }
 \value{
@@ -24,4 +35,12 @@ charm(input, password, hint, output = NULL, style = stylize(), ...)
 }
 \description{
 Encrypt and password protect an HTML document.
+}
+\note{
+Using \code{bundle = TRUE} only applies to bundling the
+decryption machinery and dependencies for the document generated
+by \code{charm()}. It is still the users responsibility to decide on whether
+\code{input} is self-contained by passing \code{self_contained = TRUE} to
+\code{rmarkdown::render()} using \code{...}, or by specifying
+\code{self_contained = TRUE} in the YAML header of \code{input}.
 }
