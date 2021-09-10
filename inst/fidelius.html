@@ -91,9 +91,10 @@
         font-family: var(--font-family), -apple-system, BlinkMacSystemFont, 
           'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 
           'Droid Sans', 'Helvetica Neue', sans-serif;
-        font-weight: 400;
+        font-weight: 300;
         font-size: var(--font-size);
         width: 100%;
+        transition: background-color 200ms ease-in-out;
       }
       .fidelius__content__btn:hover {
         background-color: var(--btn-hover-color);
@@ -134,6 +135,11 @@
         position: absolute;
         top: 22.5%;
         right: 2%;
+        opacity: 0.5;
+        transition: opacity 200ms ease-in-out;
+      }
+      .fidelius__eye:hover {
+        opacity: 1;
       }
       .fidelius__eye_open, .fidelius__eye_closed {
         width: 25px;
@@ -149,6 +155,10 @@
         line-height: 1;
         width: 25px;
         height: 25px;
+        transition: all 200ms ease-in-out;
+      }
+      .fidelius__icon__hint:hover {
+        transform: scale(1.25);
       }
 
       {{{fidelius__micromodal__css}}}
@@ -161,12 +171,17 @@
           <h1 class="fidelius__content__heading">{{header_text}}</h1>
         </div>
         <div class="fidelius__password__div">
-          <input
-          class="fidelius__content__input"
-          data-id="password"
-          type="password"
-          placeholder="{{placeholder_text}}"
-          />
+          <form action="javascript:void(0);" method="post">
+            <input
+              class="fidelius__content__input"
+              data-id="password"
+              id="password"
+              type="password"
+              name="password"
+              placeholder="{{placeholder_text}}"
+              autocomplete="current-password"
+            />
+          </form>
           <div class="fidelius__eye"><svg xmlns="http://www.w3.org/2000/svg" class="fidelius__eye_open" width="192" height="192" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><path d="M128,55.99219C48,55.99219,16,128,16,128s32,71.99219,112,71.99219S240,128,240,128,208,55.99219,128,55.99219Z" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><circle cx="128" cy="128.00061" r="40" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></circle></svg></div>
         </div>
         <button data-id="button" type="button" class="fidelius__content__btn">
@@ -199,7 +214,12 @@
 
         let submit_btn = document.querySelector('.fidelius__content__btn')
         let input = document.querySelector('.fidelius__content__input')
+        input.focus()
         let content_box = document.querySelector('.fidelius__content')
+
+        input.addEventListener('input', () => {
+          input.style.borderColor = getComputedStyle(document.body).getPropertyValue('--btn-bg-color')
+        })
 
         function toggle_password_show () {
           let show_icon = document.querySelector('.fidelius__eye > svg')
@@ -237,6 +257,7 @@
             document.close()
           } catch (error) {
             // Incorrect password
+            input.style.borderColor = "#E7040F"
             content_box.classList.add("fidelius__headShake")
             setTimeout(function() {
               content_box.classList.remove("fidelius__headShake");

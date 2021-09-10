@@ -40,7 +40,7 @@
 .modal__title {
   margin-top: 0;
   margin-bottom: 0;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 1.25rem;
   line-height: 1.25;
   color: var(--modal-title-color);
