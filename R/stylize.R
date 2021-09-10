@@ -1,7 +1,7 @@
-#' Stylize Landing Page
+#' Stylize Password Page
 #'
-#' @description Use this to style the appearance of the landing page
-#'   for the password-protected HTML file.
+#' @description Use this to style the appearance of the landing
+#'   page for the password-protected HTML file.
 #'
 #' @param header_text Header text.
 #' @param placeholder_text Password input placeholder text.
@@ -37,11 +37,11 @@ stylize <- function(
   background_color = "#f2f2f2",
   box_color = "#ffffff",
   btn_font_color = "#ffffff",
-  btn_bg_color = "#228843",
-  btn_hover_color = "#1c6d36",
+  btn_bg_color = "#19A974",
+  btn_hover_color = "#137752",
   modal_overlay = "rgba(0, 0, 0, 0.6)",
   modal_box_color = "#ffffff",
-  modal_title_color = "#1c6d36",
+  modal_title_color = "#137752",
   modal_font_color = "rgba(0, 0, 0, 0.8)"
 ) {
   structure(

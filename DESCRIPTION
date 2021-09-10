@@ -12,13 +12,14 @@ Description: This package provides a simple interface to create
   self-contained HTML documents that contain the encrypted content
   and machinery for secure in-browser decryption.
 License: MIT + file LICENSE
+URL: https://mattwarkentin.github.io/fidelius/, https://github.com/mattwarkentin/fidelius
+BugReports: https://github.com/mattwarkentin/fidelius/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports:
   askpass,
-  base64enc,
   fs,
   htmltools,
   readr,

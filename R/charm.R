@@ -1,14 +1,16 @@
-#' Encrypted HTML Documents
+#' Password Protected HTML Documents
 #'
 #' Encrypt and password protect an HTML document.
 #'
 #' @param input Path to an R Markdown or HTML file.
-#' @param password Password to unlock file.
-#' @param hint Public password hint.
-#' @param output Name of the output file.
+#' @param password Private password to unlock file.
+#' @param hint Optional public password hint.
+#' @param output Override the name of the output file.
 #' @param style Object returned from `stylize()`.
 #' @param bundle Logical. Should all of the decryption machinery and
 #'   dependencies be bundled into the HTML document? Default is `FALSE`.
+#' @param minified Logical. Should minified versions of JavaScript dependencies
+#'   be included? Default is `TRUE`.
 #' @param ... Arguments passed on to `rmarkdown::render()`.
 #'
 #' @note Using `bundle = TRUE` only applies to bundling the
@@ -25,10 +27,11 @@
 charm <- function(
   input,
   password,
-  hint,
+  hint = NULL,
   output = NULL,
   style = stylize(),
   bundle = FALSE,
+  minified = TRUE,
   ...
 ) {
   input <- fs::path_real(input)
@@ -44,6 +47,12 @@ charm <- function(
   if (!rlang::is_logical(bundle)) {
     rlang::abort(
       paste0("`bundle` must be logical, not ", class(bundle), ".")
+    )
+  }
+
+  if (!rlang::is_logical(minified)) {
+    rlang::abort(
+      paste0("`minified` must be logical, not ", class(minified), ".")
     )
   }
 
@@ -94,13 +103,14 @@ charm <- function(
   msg_enc_hex <- sodium::bin2hex(msg_enc)
 
   if (bundle) {
-    sodium <- readr::read_file_raw(
-      get_fidelius_file('libsodium/sodium.min.js')
+    sodium_js <- readr::read_file(
+      get_fidelius_file(
+        ifelse(minified, 'libsodium/sodium.min.js', 'libsodium/sodium.js')
+      )
     )
-    sodium_b64 <- base64enc::base64encode(sodium)
-    fidelius__sodium = inject_base64_script_tag(sodium_b64)
+    fidelius__sodium = inject_minified_script_tag(sodium_js)
   } else {
-    fidelius__sodium = inject_remote_script_tag(sodiumjs_remote())
+    fidelius__sodium = inject_remote_script_tag(sodiumjs_remote(minified))
   }
 
   content <- list(
@@ -109,23 +119,29 @@ charm <- function(
     fidelius__sodium = fidelius__sodium
   )
 
-  if (!missing(hint)) {
-    micromodal_css <- readr::read_file(get_fidelius_file('micromodal/micromodal.css'))
-    micromodal_html <- readr::read_file(get_fidelius_file('micromodal/micromodal.html'))
+  if (!rlang::is_null(hint)) {
+    micromodal_css <- readr::read_file(
+      get_fidelius_file('micromodal/micromodal.css')
+    )
+    micromodal_html <- readr::read_file(
+      get_fidelius_file('micromodal/micromodal.html')
+    )
     content$fidelius__micromodal__css <- micromodal_css
     content$fidelius__micromodal__html <- micromodal_html
     content$fidelius__hint <- hint
 
     if (bundle) {
-      micromodal_js <- readr::read_file_raw(
-        get_fidelius_file('micromodal/micromodal.min.js')
+      micromodal_js <- readr::read_file(
+        get_fidelius_file(
+          ifelse(minified, 'micromodal/micromodal.min.js',
+                 'micromodal/micromodal.js')
+        )
       )
-      micromodal_b64 <- base64enc::base64encode(micromodal_js)
       content$fidelius__micromodal__js <-
-        inject_base64_script_tag(micromodal_b64)
+        inject_minified_script_tag(micromodal_js)
     } else {
       content$fidelius__micromodal__js <-
-        inject_remote_script_tag(micromodaljs_remote())
+        inject_remote_script_tag(micromodaljs_remote(minified))
     }
   }
 
@@ -148,23 +164,24 @@ insert_content <- function(content) {
   whisker::whisker.render(template = template, data = content)
 }
 
-inject_base64_script_tag <- function(enc) {
-  htmltools::tags$script(
-    src = paste0(
-      "data:application/javascript; charset=utf-8;base64,",
-      enc
-    )
-  )
+inject_minified_script_tag <- function(code) {
+  htmltools::tags$script(type = "text/javascript", htmltools::HTML(code))
 }
 
 inject_remote_script_tag <- function(src) {
   htmltools::tags$script(src = src)
 }
 
-sodiumjs_remote <- function() {
-  "https://cdnjs.cloudflare.com/ajax/libs/libsodium-wrappers/0.5.4/sodium.min.js"
+sodiumjs_remote <- function(minified = TRUE) {
+  if (minified) {
+    return("https://cdnjs.cloudflare.com/ajax/libs/libsodium-wrappers/0.5.4/sodium.min.js")
+  }
+  "https://cdnjs.cloudflare.com/ajax/libs/libsodium-wrappers/0.5.4/sodium.js"
 }
 
-micromodaljs_remote <- function() {
-  "https://unpkg.com/micromodal/dist/micromodal.min.js"
+micromodaljs_remote <- function(minified = TRUE) {
+  if (minified) {
+    return("https://cdnjs.cloudflare.com/ajax/libs/micromodal/0.4.6/micromodal.min.js")
+  }
+  "https://cdnjs.cloudflare.com/ajax/libs/micromodal/0.4.6/micromodal.js"
 }

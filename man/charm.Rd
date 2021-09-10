@@ -2,31 +2,35 @@
 % Please edit documentation in R/charm.R
 \name{charm}
 \alias{charm}
-\title{Encrypted HTML Documents}
+\title{Password Protected HTML Documents}
 \usage{
 charm(
   input,
   password,
-  hint,
+  hint = NULL,
   output = NULL,
   style = stylize(),
   bundle = FALSE,
+  minified = TRUE,
   ...
 )
 }
 \arguments{
 \item{input}{Path to an R Markdown or HTML file.}
 
-\item{password}{Password to unlock file.}
+\item{password}{Private password to unlock file.}
 
-\item{hint}{Public password hint.}
+\item{hint}{Optional public password hint.}
 
-\item{output}{Name of the output file.}
+\item{output}{Override the name of the output file.}
 
 \item{style}{Object returned from \code{stylize()}.}
 
 \item{bundle}{Logical. Should all of the decryption machinery and
 dependencies be bundled into the HTML document? Default is \code{FALSE}.}
+
+\item{minified}{Logical. Should minified versions of JavaScript dependencies
+be included? Default is \code{TRUE}.}
 
 \item{...}{Arguments passed on to \code{rmarkdown::render()}.}
 }
