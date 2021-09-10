@@ -11,6 +11,15 @@ This package provides a simple interface to create
   self-contained HTML documents that contain the encrypted content
   and machinery for secure in-browser decryption.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://mattwarkentin.github.io/fidelius/}
+  \item \url{https://github.com/mattwarkentin/fidelius}
+  \item Report bugs at \url{https://github.com/mattwarkentin/fidelius/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Matthew T. Warkentin \email{warkentin@lunenfeld.ca} (\href{https://orcid.org/0000-0001-8730-3511}{ORCID})
 

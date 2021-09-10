@@ -20,9 +20,10 @@ password-protect your static HTML files and support portable, secure,
 and self-contained in-browser decryption.
 
 This package sits on the shoulders of the cryptography library,
-`sodium`, to provide secure methods for encryption, decryption, and
-password hashing - both by it’s `R` interface via
-[`sodium`](https://github.com/jeroen/sodium) and its JavaScript API for
+[`sodium`](https://doc.libsodium.org/), to provide secure methods for
+encryption, decryption, and password hashing - both by it’s `R`
+interface via [`{sodium}`](https://github.com/jeroen/sodium) and its
+[JavaScript API](https://github.com/jedisct1/libsodium.js) for
 in-browser decryption.
 
 This package drew inspiration from the
@@ -73,16 +74,22 @@ and then read into `R` and securely encrypted using
 `sodium::data_encrypt()`, based on the user-provided password and a
 nonce.
 
-The output file is a self-contained HTML document that contains the
-encrypted content, the nonce, and the machinery to perform secure
-in-browser decryption. The correct password is required for decryption
-and to reveal the hidden content. Since the HTML document is entirely
-self-contained, it can be hosted on any static site hosting service
-(e.g. GitHub Pages) or shared directly with others (e.g. via email).
+The output file is an HTML document that contains the encrypted content,
+the nonce, and the machinery to perform secure in-browser decryption.
+The correct password is required for decryption and to reveal the hidden
+content. The output file can be hosted on any static site hosting
+service (e.g. GitHub Pages).
 
 By default, the name of the output file is the name of the input file
 with an HTML extension, but can be configured using the `output`
 argument to `charm()`.
+
+Optionally, you may specify `bundle = TRUE` to bundle all of the
+`fidelius` dependencies for offline use. If the `input` file is also
+self-contained (such as with `self_contained = TRUE`), the HTML document
+is entirely self-contained and can be easily shared with others
+(e.g. via email) as a standalone document. See `?charm` for more
+details.
 
 ## Password Hint
 
@@ -93,7 +100,7 @@ access to your document using the `hint` argument:
 charm("index.Rmd", password = "pw1234!", hint = "A very bad password!")
 ```
 
-This bundles the lightweight
+This includes the lightweight
 [`Micromodal`](https://github.com/ghosh/Micromodal) JavaScript library
 to provide a simple modal pop-up containing your password hint.
 

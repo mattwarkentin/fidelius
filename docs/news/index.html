@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Password Protected HTML Documents — charm • fidelius</title>
+<title>Changelog • fidelius</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,7 @@
 
 
 
-<meta property="og:title" content="Password Protected HTML Documents — charm" />
-<meta property="og:description" content="Encrypt and password protect an HTML document." />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -59,7 +58,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -114,83 +113,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Password Protected HTML Documents</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mattwarkentin/fidelius/blob/master/R/charm.R'><code>R/charm.R</code></a></small>
-    <div class="hidden name"><code>charm.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/mattwarkentin/fidelius/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    <p>Encrypt and password protect an HTML document.</p>
-    </div>
-
-    <pre class="usage"><span class='fu'>charm</span><span class='op'>(</span>
-  <span class='va'>input</span>,
-  <span class='va'>password</span>,
-  hint <span class='op'>=</span> <span class='cn'>NULL</span>,
-  output <span class='op'>=</span> <span class='cn'>NULL</span>,
-  style <span class='op'>=</span> <span class='fu'><a href='stylize.html'>stylize</a></span><span class='op'>(</span><span class='op'>)</span>,
-  bundle <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  minified <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>input</th>
-      <td><p>Path to an R Markdown or HTML file.</p></td>
-    </tr>
-    <tr>
-      <th>password</th>
-      <td><p>Private password to unlock file.</p></td>
-    </tr>
-    <tr>
-      <th>hint</th>
-      <td><p>Optional public password hint.</p></td>
-    </tr>
-    <tr>
-      <th>output</th>
-      <td><p>Override the name of the output file.</p></td>
-    </tr>
-    <tr>
-      <th>style</th>
-      <td><p>Object returned from <code><a href='stylize.html'>stylize()</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>bundle</th>
-      <td><p>Logical. Should all of the decryption machinery and
-dependencies be bundled into the HTML document? Default is <code>FALSE</code>.</p></td>
-    </tr>
-    <tr>
-      <th>minified</th>
-      <td><p>Logical. Should minified versions of JavaScript dependencies
-be included? Default is <code>TRUE</code>.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Arguments passed on to <code><a href='https://pkgs.rstudio.com/rmarkdown/reference/render.html'>rmarkdown::render()</a></code>.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p><code>input</code>, invisibly.</p>
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>Using <code>bundle = TRUE</code> only applies to bundling the
-decryption machinery and dependencies for the document generated
-by <code>charm()</code>. It is still the users responsibility to decide on whether
-<code>input</code> is self-contained by passing <code>self_contained = TRUE</code> to
-<code><a href='https://pkgs.rstudio.com/rmarkdown/reference/render.html'>rmarkdown::render()</a></code> using <code>...</code>, or by specifying
-<code>self_contained = TRUE</code> in the YAML header of <code>input</code>.</p>
-
+    <div id="fidelius-0009000" class="section level1">
+<h1 class="page-header" data-toc-text="0.0.0.9000">
+<a href="#fidelius-0009000" class="anchor"></a>fidelius 0.0.0.9000</h1>
+<ul>
+<li>Initial package development</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 
