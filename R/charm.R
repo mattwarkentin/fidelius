@@ -3,7 +3,9 @@
 #' Encrypt and password protect an HTML document.
 #'
 #' @param input Path to an R Markdown or HTML file.
-#' @param password Private password to unlock file.
+#' @param password Private password to unlock file. If not provided, you will
+#'   be asked to supply a password by a prompt if you are working from an
+#'   interactive session.
 #' @param hint Optional public password hint.
 #' @param output Override the name of the output file.
 #' @param style Object returned from `stylize()`.
@@ -90,7 +92,6 @@ charm <- function(
     rmarkdown::render(
       input = input,
       output_file = file_to_encrypt,
-      intermediates_dir = tempdir(),
       ...
     )
   } else {

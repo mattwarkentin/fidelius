@@ -18,7 +18,9 @@ charm(
 \arguments{
 \item{input}{Path to an R Markdown or HTML file.}
 
-\item{password}{Private password to unlock file.}
+\item{password}{Private password to unlock file. If not provided, you will
+be asked to supply a password by a prompt if you are working from an
+interactive session.}
 
 \item{hint}{Optional public password hint.}
 

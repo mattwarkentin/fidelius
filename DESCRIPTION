@@ -25,5 +25,6 @@ Imports:
   readr,
   rlang,
   rmarkdown,
+  rstudioapi,
   sodium,
   whisker
