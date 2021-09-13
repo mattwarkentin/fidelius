@@ -7,6 +7,16 @@ navbar:
     href: index.html
   - text: Functions
     href: reference/index.html
+  - text: Examples
+    menu:
+    - text: HTML Document
+      href: articles/examples/example_html_document.html
+    - text: Xaringan Presentation
+      href: articles/examples/example_xaringan_presentation.html
+    - text: Flex Dashboard
+      href: articles/examples/example_flex_dashboard.html
+    - text: Distill Article
+      href: articles/examples/example_distill_article.html
   - text: Changelog
     href: news/index.html
   right:
