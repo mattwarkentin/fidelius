@@ -1,11 +1,15 @@
 ---
-title: "Untitled"
+title: "Robobook"
+date: "`r Sys.Date()`"
 pkgdown:
   as_is: true
 output: 
   fidelius::html_password_protected:
     password: "pw1234!"
     hint: "Password is pw1234!"
+    output_format:
+      rmdformats::robobook:
+        highlight: kate
 ---
 
 ```{r setup, include=FALSE}

@@ -1,5 +1,7 @@
 ---
 title: "Untitled"
+pkgdown:
+  as_is: true
 output:
   fidelius::html_password_protected:
     password: "pw1234!"
@@ -8,8 +10,6 @@ output:
       flexdashboard::flex_dashboard:
         orientation: columns
         vertical_layout: fill
-pkgdown:
-  as_is: true
 ---
 
 ```{r setup, include=FALSE}

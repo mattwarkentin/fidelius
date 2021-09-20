@@ -4,6 +4,8 @@ subtitle: "⚔<br/>with xaringan"
 author: "Yihui Xie"
 institute: "RStudio, PBC"
 date: "2016/12/12 (updated: `r Sys.Date()`)"
+pkgdown:
+  as_is: true
 output:
   fidelius::html_password_protected:
     password: "pw1234!"
@@ -11,8 +13,6 @@ output:
     output_format: 
       xaringan::moon_reader:
         self_contained: true
-pkgdown:
-  as_is: true
 ---
 
 background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)

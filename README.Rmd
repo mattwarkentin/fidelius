@@ -162,6 +162,10 @@ Providing a `hint` will include the lightweight [`Micromodal`](https://github.co
 
 You may specify `bundle = TRUE` (or `bundle: true`) to bundle all of the `fidelius` dependencies for offline use. If the `input` file (or `output_format`) is also self-contained (such as with `self_contained = TRUE`), the `fidelius` HTML document is entirely self-contained and can easily be shared with others (e.g. via email) as a standalone document. See `?charm` for more details.
 
+## Password Manager
+
+I have tried to make sure that `fidelius` is compatible with common password management tools (e.g. 1Pass, LastPass, etc.). If your password manager is not detecting the password field on the `fidelius` landing page, please [file an issue](https://github.com/mattwarkentin/fidelius/issues) that includes which browser and password manager you use, and I will work to support it.
+
 ## Code of Conduct
 
 Please note that the fidelius project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

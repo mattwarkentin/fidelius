@@ -8,14 +8,16 @@ author:
     affiliation: Spacely Sprockets
     affiliation_url: https://example.com/spacelysprokets
 date: "`r Sys.Date()`"
-output: 
+pkgdown:
+  as_is: true
+output:
   fidelius::html_password_protected:
     password: "pw1234!"
     hint: "Password is pw1234!"
-    output_format:
-      distill::distill_article
-pkgdown:
-  as_is: true
+    output_format: 
+      distill::distill_article:
+        self_contained: true
+  
 ---
 
 ```{r setup, include=FALSE}

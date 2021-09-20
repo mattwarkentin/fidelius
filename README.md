@@ -226,6 +226,16 @@ You may specify `bundle = TRUE` (or `bundle: true`) to bundle all of the
 self-contained and can easily be shared with others (e.g. via email) as
 a standalone document. See `?charm` for more details.
 
+## Password Manager
+
+I have tried to make sure that `fidelius` is compatible with common
+password management tools (e.g. 1Pass, LastPass, etc.). If your password
+manager is not detecting the password field on the `fidelius` landing
+page, please [file an
+issue](https://github.com/mattwarkentin/fidelius/issues) that includes
+which browser and password manager you use, and I will work to support
+it.
+
 ## Code of Conduct
 
 Please note that the fidelius project is released with a [Contributor
