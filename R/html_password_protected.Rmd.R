@@ -1,6 +1,6 @@
 #' Password Protected HTML Document
 #'
-#' An R Markdown document format to encrypt and password protect any HTML
+#' An R Markdown document format to encrypt and password protect an HTML
 #' document using `charm()`.
 #'
 #' @param output_format An R Markdown format that renders to HTML. By default,
@@ -65,6 +65,7 @@ html_password_protected <- function(
       rlang::abort("`password` must be provided.")
     }
   }
+
   if (inherits(output_format, "character")) {
     format_fun <- rlang::parse_expr(output_format)
     format <- rlang::exec(.fn = format_fun)

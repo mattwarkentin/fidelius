@@ -49,7 +49,7 @@ R Markdown output format based on \code{output_format} to pass to
 \code{rmarkdown::render()}.
 }
 \description{
-An R Markdown document format to encrypt and password protect any HTML
+An R Markdown document format to encrypt and password protect an HTML
 document using \code{charm()}.
 }
 \note{

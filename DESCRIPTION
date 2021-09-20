@@ -1,5 +1,5 @@
 Package: fidelius
-Title: Password Protected HTML Documents
+Title: Browser-Side Password-Protected HTML Documents
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Matthew T.",
@@ -8,11 +8,11 @@ Authors@R:
            email = "warkentin@lunenfeld.ca",
            comment = c(ORCID = "0000-0001-8730-3511"))
 Description: This package provides a simple interface to create
-  secure, encrypted, password-protected static HTML documents, and creates
-  self-contained HTML documents that contain the encrypted content
-  and machinery for secure in-browser decryption.
+  secure, encrypted, and password-protected static HTML documents that 
+  include the necessary machinery for secure in-browser decryption.
 License: MIT + file LICENSE
-URL: https://mattwarkentin.github.io/fidelius/, https://github.com/mattwarkentin/fidelius
+URL: https://mattwarkentin.github.io/fidelius/, 
+  https://github.com/mattwarkentin/fidelius
 BugReports: https://github.com/mattwarkentin/fidelius/issues
 Encoding: UTF-8
 LazyData: true

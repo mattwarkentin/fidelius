@@ -1,6 +1,4 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # fidelius
 
 <!-- badges: start -->
@@ -15,9 +13,9 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 > the chosen person, or Secret-Keeper, and is henceforth impossible to
 > find - unless, of course, the Secret-Keeper chooses to divulge it.”
 
-The goal of `fidelius` is to provide a simple way to encrypt and
-password-protect your static HTML files and support portable, secure,
-and self-contained in-browser decryption.
+The goal of `fidelius` is to provide a simple interface for encrypting
+and password-protecting your static HTML files, and supporting secure
+and (optionally) self-contained in-browser decryption.
 
 This package sits on the shoulders of the cryptography library,
 [`sodium`](https://doc.libsodium.org/), to provide secure methods for
@@ -51,58 +49,182 @@ feel free to file an
 library(fidelius)
 ```
 
-You will generally only use a single function from this package, the
-`charm()` function. As its main input, this function accepts an R
-Markdown file, that must be rendered to an HTML format, or an existing
-HTML file.
+There are two main functions that you will use:
+
+1.  [`charm()`](#charm) - Use this function to render an existing R
+    Markdown or HTML document into a `fidelius` password-protected HTML
+    document.
+
+2.  [`html_password_protected()`](#html_password_protected) - An R
+    Markdown `output` format that can be used directly in the YAML
+    frontmatter to create password-protected files rendered to other
+    HTML formats.
+
+In both cases, the desired HTML document format is rendered and then
+securely encrypted using `sodium::data_encrypt()`, based on the
+user-provided `password` and a nonce. The `output` file is an HTML
+document that contains the encrypted content, the nonce, and the
+machinery to perform secure in-browser decryption. The correct password
+is required for decryption and to reveal the hidden content. The output
+file can be hosted on any static site hosting service (e.g. GitHub
+Pages) for browser-side password-protection and decryption.
+
+By default, the name of the output file is the name of the input file
+with an HTML extension, but this can be configured using the `output`
+argument.
+
+### `charm()`
+
+As its main input, `charm()` accepts an R Markdown file (that must be
+rendered to an HTML format) or an existing HTML file.
 
 When calling `charm()`, you must either supply the password in the
 function call, like `charm("index.Rmd", password = "pw1234!")`, or, if
 `password` is not supplied, you will be prompted to supply the password
 in a pop-up (only if the function is invoked in an interactive `R`
 session). The password can be any set of characters that can be hashed
-using the `sodium::sha256()` algorithm.
+using the `sodium::hash()` algorithm.
 
 ``` r
 # To supply the password interactively
 charm("index.Rmd")
 ```
 
-The HTML document produced by `rmarkdown::render("index.Rmd")` is saved
-to a temporary directory (which is destroyed when the `R` session ends),
-and then read into `R` and securely encrypted using
-`sodium::data_encrypt()`, based on the user-provided password and a
-nonce.
+If an R Markdown file is provided as `input`, the HTML document produced
+by `rmarkdown::render(input)` is saved to a temporary directory that is
+destroyed when the `R` session ends.
 
-The output file is an HTML document that contains the encrypted content,
-the nonce, and the machinery to perform secure in-browser decryption.
-The correct password is required for decryption and to reveal the hidden
-content. The output file can be hosted on any static site hosting
-service (e.g. GitHub Pages).
+See [Styling](#styling) and [Password Hint](#password-hint) for more
+details on how to style your landing page and how to include a helpful
+password hint!
 
-By default, the name of the output file is the name of the input file
-with an HTML extension, but can be configured using the `output`
-argument to `charm()`.
+### `html_password_protected()`
 
-Optionally, you may specify `bundle = TRUE` to bundle all of the
-`fidelius` dependencies for offline use. If the `input` file is also
-self-contained (such as with `self_contained = TRUE`), the HTML document
-is entirely self-contained and can be easily shared with others
-(e.g. via email) as a standalone document. See `?charm` for more
-details.
+Use `html_password_protected` by supplying it as the `output` in the
+YAML frontmatter of an R Markdown file.
+
+``` yaml
+---
+output: fidelius::html_password_protected
+---
+```
+
+By default, this will render your content as an
+`rmarkdown::html_document()` before encrypting and password protecting
+the document.
+
+To render to a different format, specify the `output_format` (you may
+pass any additional arguments to the desired `output_format` as you
+normally would):
+
+``` yaml
+---
+output:
+  fidelius::html_password_protected:
+    output_format: 
+      distill::distill_article
+        self_contained: true
+---
+```
+
+`fidelius` works nicely with many existing HTML output formats,
+including those offered by the
+[`{rmdformats}`](https://github.com/juba/rmdformats) and
+[`{cleanrmd}`](https://github.com/gadenbuie/cleanrmd) packages. At the
+moment, `{bookdown}` formats are not supported due to their unique
+rendering process (this may change in the future).
+
+In both of the above examples, if you try to render the document by
+using the “Knit” button in RStudio or using `rmarkdown::render()` in an
+interactive session, you will be prompted to supply a `password`. In a
+non-interactive session, the rendering will fail.
+
+You may include the `password` directly in the YAML frontmatter, but be
+sure not to store the R Markdown file in a public repository as the
+password will be visible in plain-text.
+
+``` yaml
+---
+output:
+  fidelius::html_password_protected:
+    password: "pw1234!"
+    output_format: distill::distill_article
+---
+```
+
+During development, you may wish to set `preview = TRUE` to bypass the
+encryption and password-protection steps in order to view the document
+more quickly. This option pairs very nicely with
+`xaringan::infinite_moon_reader()` to view changes in real time.
+
+``` yaml
+---
+output:
+  fidelius::html_password_protected:
+    password: "pw1234!"
+    preview: true
+---
+```
+
+## Styling
+
+You may wish to style the aesthetics and text of the password landing
+page to your own preferences. This can be done simply by passing the
+`stylize()` function to the `style` argument, or by specifying `style`
+arguments directly in the YAML frontmatter.
+
+``` r
+charm("index.Rmd", style = stylize(button_text = "Open Sesame!"))
+```
+
+or
+
+``` yaml
+---
+output:
+  fidelius::html_password_protected:
+    style:
+      button_text: "Open Sesame!"
+---
+```
+
+See `?fidelius::stylize` to find out more about which aspects of the
+landing page can be styled.
 
 ## Password Hint
 
-Optionally, you may wish to provide a hint to those trying to gain
-access to your document using the `hint` argument:
+Optionally, you may wish to provide a helpful hint for anyone (or
+yourself) trying to remember the password and gain access to the
+document. You can do this by passing a string to the `hint` argument:
 
 ``` r
 charm("index.Rmd", password = "pw1234!", hint = "A very bad password!")
 ```
 
-This includes the lightweight
+or
+
+``` yaml
+---
+title: "My Protected Document"
+output:
+  fidelius::html_password_protected:
+    password: "pw1234!"
+    hint: "A very bad password!"
+---
+```
+
+Providing a `hint` will include the lightweight
 [`Micromodal`](https://github.com/ghosh/Micromodal) JavaScript library
-to provide a simple modal pop-up containing your password hint.
+to provide a simple modal pop-up that contains your password hint.
+
+## Portability
+
+You may specify `bundle = TRUE` (or `bundle: true`) to bundle all of the
+`fidelius` dependencies for offline use. If the `input` file (or
+`output_format`) is also self-contained (such as with
+`self_contained = TRUE`), the `fidelius` HTML document is entirely
+self-contained and can easily be shared with others (e.g. via email) as
+a standalone document. See `?charm` for more details.
 
 ## Code of Conduct
 
