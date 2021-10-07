@@ -109,9 +109,15 @@ charm <- function(
         ifelse(minified, 'libsodium/sodium.min.js', 'libsodium/sodium.js')
       )
     )
-    fidelius__sodium = inject_minified_script_tag(sodium_js)
+    fidelius__sodium = inject_minified_script_tag(
+      id = "fidelius__sodium",
+      code = sodium_js
+    )
   } else {
-    fidelius__sodium = inject_remote_script_tag(sodiumjs_remote(minified))
+    fidelius__sodium = inject_remote_script_tag(
+      id = "fidelius__sodium",
+      src = sodiumjs_remote(minified)
+    )
   }
 
   content <- list(
@@ -139,10 +145,13 @@ charm <- function(
         )
       )
       content$fidelius__micromodal__js <-
-        inject_minified_script_tag(micromodal_js)
+        inject_minified_script_tag(id = "fidelius__micromodal", micromodal_js)
     } else {
       content$fidelius__micromodal__js <-
-        inject_remote_script_tag(micromodaljs_remote(minified))
+        inject_remote_script_tag(
+          id = "fidelius__micromodal",
+          src = micromodaljs_remote(minified)
+        )
     }
   }
 
@@ -165,12 +174,16 @@ insert_content <- function(content) {
   whisker::whisker.render(template = template, data = content)
 }
 
-inject_minified_script_tag <- function(code) {
-  htmltools::tags$script(type = "text/javascript", htmltools::HTML(code))
+inject_minified_script_tag <- function(id, code) {
+  htmltools::tags$script(
+    id = id,
+    type = "text/javascript",
+    htmltools::HTML(code)
+  )
 }
 
-inject_remote_script_tag <- function(src) {
-  htmltools::tags$script(src = src)
+inject_remote_script_tag <- function(id, src) {
+  htmltools::tags$script(id = id, src = src)
 }
 
 sodiumjs_remote <- function(minified = TRUE) {
