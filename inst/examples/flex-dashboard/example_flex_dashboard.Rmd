@@ -1,0 +1,40 @@
+---
+title: "Untitled"
+output:
+  fidelius::html_password_protected:
+    password: "pw1234!"
+    hint: "Password is pw1234!"
+    output_format:
+      flexdashboard::flex_dashboard:
+        orientation: columns
+        vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
+```
+

@@ -1,10 +1,6 @@
-pandoc: '2.13'
+pandoc: 2.14.2
 pkgdown: 1.6.1
 pkgdown_sha: ~
-articles:
-  examples/example_distill: example_distill.html
-  examples/example_flex_dashboard: example_flex_dashboard.html
-  examples/example_html_document: example_html_document.html
-  examples/example_xaringan_presentation: example_xaringan_presentation.html
-last_built: 2021-09-13T17:45Z
+articles: {}
+last_built: 2021-10-07T15:05Z
 

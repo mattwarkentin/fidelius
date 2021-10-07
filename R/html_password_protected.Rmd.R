@@ -62,7 +62,7 @@ html_password_protected <- function(
     if (rstudioapi::isAvailable(child_ok = TRUE)) {
       password <- rstudioapi::askForPassword()
     } else {
-      rlang::abort("`password` must be provided.")
+      rlang::abort('`password` must be provided for non-interactive rendering.')
     }
   }
 
