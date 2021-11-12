@@ -4,14 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="This package provides a simple interface to create
+  secure, encrypted, and password-protected static HTML documents that 
+  include the necessary machinery for secure in-browser decryption.">
 <title>Browser-Side Password-Protected HTML Documents • fidelius</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Browser-Side Password-Protected HTML Documents">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Browser-Side Password-Protected HTML Documents">
 <meta property="og:description" content="This package provides a simple interface to create
   secure, encrypted, and password-protected static HTML documents that 
   include the necessary machinery for secure in-browser decryption.">
@@ -20,151 +22,119 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">fidelius</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
-      </span>
-    </div>
+<body>
+    <a href="#container" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <a class="navbar-brand me-2" href="index.html">fidelius</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9000</small>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-2">
+      <ul class="navbar-nav me-auto">
+<li class="active nav-item">
+  <a class="nav-link" href="index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
-<li>
-  <a href="reference/index.html">Functions</a>
+<li class="nav-item">
+  <a class="nav-link" href="reference/index.html">Functions</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Examples
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/examples/html-document/example_html_document.html">HTML Document</a>
-    </li>
-    <li>
-      <a href="articles/examples/xaringan/example_xaringan_presentation.html">Xaringan Presentation</a>
-    </li>
-    <li>
-      <a href="articles/examples/distill/example_distill_article.html">Distill Article</a>
-    </li>
-    <li>
-      <a href="articles/examples/rmdformats-robobook/example_rmdformats_robobook.html">Rmdformats Robobook</a>
-    </li>
-    <li>
-      <a href="articles/examples/flex-dashboard/example_flex_dashboard.html">Flex Dashboard</a>
-    </li>
-    <li>
-      <a href="articles/examples/ioslides/example_ioslides_presentation.html">Ioslides Presentation</a>
-    </li>
-    <li>
-      <a href="articles/examples/prettydoc/example_prettydoc.html">Prettydoc</a>
-    </li>
-    <li>
-      <a href="articles/examples/revealjs/example_revealjs.html">Revealjs Presentation</a>
-    </li>
-    <li>
-      <a href="articles/examples/slidy/example_slidy_presentation.html">Slidy Presentation</a>
-    </li>
-    <li>
-      <a href="articles/examples/tufte/example_tufte_html.html">Tufte</a>
-    </li>
-    <li>
-      <a href="articles/examples/cleanrmd/example_cleanrmd.html">Cleanrmd</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="news/index.html">Changelog</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/mattwarkentin/fidelius">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-examples">Examples</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-examples">
+    <a class="dropdown-item" href="articles/examples/html-document/example_html_document.html">HTML Document</a>
+    <a class="dropdown-item" href="articles/examples/xaringan/example_xaringan_presentation.html">Xaringan Presentation</a>
+    <a class="dropdown-item" href="articles/examples/distill/example_distill_article.html">Distill Article</a>
+    <a class="dropdown-item" href="articles/examples/rmdformats-robobook/example_rmdformats_robobook.html">Rmdformats Robobook</a>
+    <a class="dropdown-item" href="articles/examples/flex-dashboard/example_flex_dashboard.html">Flex Dashboard</a>
+    <a class="dropdown-item" href="articles/examples/ioslides/example_ioslides_presentation.html">Ioslides Presentation</a>
+    <a class="dropdown-item" href="articles/examples/prettydoc/example_prettydoc.html">Prettydoc</a>
+    <a class="dropdown-item" href="articles/examples/revealjs/example_revealjs.html">Revealjs Presentation</a>
+    <a class="dropdown-item" href="articles/examples/slidy/example_slidy_presentation.html">Slidy Presentation</a>
+    <a class="dropdown-item" href="articles/examples/tufte/example_tufte_html.html">Tufte</a>
+    <a class="dropdown-item" href="articles/examples/cleanrmd/example_cleanrmd.html">Cleanrmd</a>
   </div>
-<!--/.container -->
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="news/index.html">Changelog</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/mattwarkentin/fidelius">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
-
-      
-
-      </header><div class="row">
+  </div>
+</nav><div class="container template-home" id="container">
+<div class="row">
   <div class="contents col-md-9">
-<div id="fidelius" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#fidelius" class="anchor"></a>fidelius</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="fidelius">fidelius<a class="anchor" aria-label="anchor" href="#fidelius"></a>
+</h1></div>
 <!-- badges: start -->
 
 <blockquote>
 <p>“An immensely complex spell involving the magical concealment of a secret inside a single, living soul. The information is hidden inside the chosen person, or Secret-Keeper, and is henceforth impossible to find - unless, of course, the Secret-Keeper chooses to divulge it.”</p>
 </blockquote>
 <p>The goal of <code>fidelius</code> is to provide a simple interface for encrypting and password-protecting your static HTML files, and supporting secure and (optionally) self-contained in-browser decryption.</p>
-<p>This package sits on the shoulders of the cryptography library, <a href="https://doc.libsodium.org/"><code>sodium</code></a>, to provide secure methods for encryption, decryption, and password hashing - both by it’s <code>R</code> interface via <a href="https://github.com/jeroen/sodium"><code>{sodium}</code></a> and its <a href="https://github.com/jedisct1/libsodium.js">JavaScript API</a> for in-browser decryption.</p>
-<p>This package drew inspiration from the <a href="https://github.com/robinmoisson/staticrypt"><code>staticrypt</code></a>, <a href="https://github.com/favstats/rmdprotectr"><code>rmdprotectr</code></a>, and <a href="https://github.com/dirkschumacher/encryptedRmd"><code>encryptedRmd</code></a> projects.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<p>This package sits on the shoulders of the cryptography library, <a href="https://doc.libsodium.org/" class="external-link"><code>sodium</code></a>, to provide secure methods for encryption, decryption, and password hashing - both by it’s <code>R</code> interface via <a href="https://github.com/jeroen/sodium" class="external-link"><code>{sodium}</code></a> and its <a href="https://github.com/jedisct1/libsodium.js" class="external-link">JavaScript API</a> for in-browser decryption.</p>
+<p>This package drew inspiration from the <a href="https://github.com/robinmoisson/staticrypt" class="external-link"><code>staticrypt</code></a>, <a href="https://github.com/favstats/rmdprotectr" class="external-link"><code>rmdprotectr</code></a>, and <a href="https://github.com/dirkschumacher/encryptedRmd" class="external-link"><code>encryptedRmd</code></a> projects.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>Currently, you can only install the development version of this package from GitHub by running the following command:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"mattwarkentin/fidelius"</span><span class="op">)</span></code></pre></div>
-<p>If you notice any bugs or would like to request new features, please feel free to file an <a href="https://github.com/mattwarkentin/fidelius/issues">Issue</a>.</p>
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"mattwarkentin/fidelius"</span><span class="op">)</span></code></pre></div>
+<p>If you notice any bugs or would like to request new features, please feel free to file an <a href="https://github.com/mattwarkentin/fidelius/issues" class="external-link">Issue</a>.</p>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mattwarkentin.github.io/fidelius/">fidelius</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mattwarkentin.github.io/fidelius/" class="external-link">fidelius</a></span><span class="op">)</span></code></pre></div>
 <p>There are two main functions that you will use:</p>
-<ol>
+<ol style="list-style-type: decimal">
 <li><p><a href="#charm"><code>charm()</code></a> - Use this function to render an existing R Markdown or HTML document into a <code>fidelius</code> password-protected HTML document.</p></li>
 <li><p><a href="#html_password_protected"><code>html_password_protected()</code></a> - An R Markdown <code>output</code> format that can be used directly in the YAML frontmatter to create password-protected files rendered to other HTML formats.</p></li>
 </ol>
-<p>In both cases, the desired HTML document format is rendered and then securely encrypted using <code><a href="https://rdrr.io/pkg/sodium/man/symmetric.html">sodium::data_encrypt()</a></code>, based on the user-provided <code>password</code> and a nonce. The <code>output</code> file is an HTML document that contains the encrypted content, the nonce, and the machinery to perform secure in-browser decryption. The correct password is required for decryption and to reveal the hidden content. The output file can be hosted on any static site hosting service (e.g. GitHub Pages) for browser-side password-protection and decryption.</p>
+<p>In both cases, the desired HTML document format is rendered and then securely encrypted using <code><a href="https://rdrr.io/pkg/sodium/man/symmetric.html" class="external-link">sodium::data_encrypt()</a></code>, based on the user-provided <code>password</code> and a nonce. The <code>output</code> file is an HTML document that contains the encrypted content, the nonce, and the machinery to perform secure in-browser decryption. The correct password is required for decryption and to reveal the hidden content. The output file can be hosted on any static site hosting service (e.g. GitHub Pages) for browser-side password-protection and decryption.</p>
 <p>By default, the name of the output file is the name of the input file with an HTML extension, but this can be configured using the <code>output</code> argument.</p>
-<div id="charm" class="section level3">
-<h3 class="hasAnchor">
-<a href="#charm" class="anchor"></a><code>charm()</code>
+<div class="section level3">
+<h3 id="charm">
+<code>charm()</code><a class="anchor" aria-label="anchor" href="#charm"></a>
 </h3>
 <p>As its main input, <code><a href="reference/charm.html">charm()</a></code> accepts an R Markdown file (that must be rendered to an HTML format) or an existing HTML file.</p>
-<p>When calling <code><a href="reference/charm.html">charm()</a></code>, you must either supply the password in the function call, like <code><a href="reference/charm.html">charm("index.Rmd", password = "pw1234!")</a></code>, or, if <code>password</code> is not supplied, you will be prompted to supply the password in a pop-up (only if the function is invoked in an interactive <code>R</code> session). The password can be any set of characters that can be hashed using the <code><a href="https://rdrr.io/pkg/sodium/man/hash.html">sodium::hash()</a></code> algorithm.</p>
+<p>When calling <code><a href="reference/charm.html">charm()</a></code>, you must either supply the password in the function call, like <code>charm("index.Rmd", password = "pw1234!")</code>, or, if <code>password</code> is not supplied, you will be prompted to supply the password in a pop-up (only if the function is invoked in an interactive <code>R</code> session). The password can be any set of characters that can be hashed using the <code><a href="https://rdrr.io/pkg/sodium/man/hash.html" class="external-link">sodium::hash()</a></code> algorithm.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># To supply the password interactively</span>
 <span class="fu"><a href="reference/charm.html">charm</a></span><span class="op">(</span><span class="st">"index.Rmd"</span><span class="op">)</span></code></pre></div>
-<p>If an R Markdown file is provided as <code>input</code>, the HTML document produced by <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html">rmarkdown::render(input)</a></code> is saved to a temporary directory that is destroyed when the <code>R</code> session ends.</p>
+<p>If an R Markdown file is provided as <code>input</code>, the HTML document produced by <code>rmarkdown::render(input)</code> is saved to a temporary directory that is destroyed when the <code>R</code> session ends.</p>
 <p>See <a href="#styling">Styling</a> and <a href="#password-hint">Password Hint</a> for more details on how to style your landing page and how to include a helpful password hint!</p>
 </div>
-<div id="html_password_protected" class="section level3">
-<h3 class="hasAnchor">
-<a href="#html_password_protected" class="anchor"></a><code>html_password_protected()</code>
+<div class="section level3">
+<h3 id="html_password_protected">
+<code>html_password_protected()</code><a class="anchor" aria-label="anchor" href="#html_password_protected"></a>
 </h3>
 <p>Use <code>html_password_protected</code> by supplying it as the <code>output</code> in the YAML frontmatter of an R Markdown file.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> fidelius::html_password_protected</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>By default, this will render your content as an <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/html_document.html">rmarkdown::html_document()</a></code> before encrypting and password protecting the document.</p>
+<p>By default, this will render your content as an <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/html_document.html" class="external-link">rmarkdown::html_document()</a></code> before encrypting and password protecting the document.</p>
 <p>To render to a different format, specify the <code>output_format</code> (you may pass any additional arguments to the desired <code>output_format</code> as you normally would):</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
@@ -173,8 +143,8 @@
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">      distill::distill_article</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">self_contained</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p><code>fidelius</code> works nicely with many existing HTML output formats, including those offered by the <a href="https://github.com/juba/rmdformats"><code>{rmdformats}</code></a> and <a href="https://github.com/gadenbuie/cleanrmd"><code>{cleanrmd}</code></a> packages. At the moment, <a href="https://github.com/rstudio/bookdown">bookdown</a> formats are not supported due to their unique rendering process (this may change in the future).</p>
-<p>In both of the above examples, if you try to render the document by using the “Knit” button in RStudio or using <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html">rmarkdown::render()</a></code> in an interactive session, you will be prompted to supply a <code>password</code>. In a non-interactive session, the rendering will fail.</p>
+<p><code>fidelius</code> works nicely with many existing HTML output formats, including those offered by the <a href="https://github.com/juba/rmdformats" class="external-link"><code>{rmdformats}</code></a> and <a href="https://github.com/gadenbuie/cleanrmd" class="external-link"><code>{cleanrmd}</code></a> packages. At the moment, <a href="https://github.com/rstudio/bookdown" class="external-link">bookdown</a> formats are not supported due to their unique rendering process (this may change in the future).</p>
+<p>In both of the above examples, if you try to render the document by using the “Knit” button in RStudio or using <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code> in an interactive session, you will be prompted to supply a <code>password</code>. In a non-interactive session, the rendering will fail.</p>
 <p>You may include the <code>password</code> directly in the YAML frontmatter, but be sure not to store the R Markdown file in a public repository as the password will be visible in plain-text.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
@@ -182,7 +152,7 @@
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">password</span><span class="kw">:</span><span class="at"> </span><span class="st">"pw1234!"</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">output_format</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>During development, you may wish to set <code>preview = TRUE</code> to bypass the encryption and password-protection steps in order to view the document more quickly. This option pairs very nicely with <code><a href="https://rdrr.io/pkg/xaringan/man/inf_mr.html">xaringan::infinite_moon_reader()</a></code> to view changes in real time.</p>
+<p>During development, you may wish to set <code>preview = TRUE</code> to bypass the encryption and password-protection steps in order to view the document more quickly. This option pairs very nicely with <code><a href="https://rdrr.io/pkg/xaringan/man/inf_mr.html" class="external-link">xaringan::infinite_moon_reader()</a></code> to view changes in real time.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">  fidelius:</span><span class="fu">:html_password_protected</span><span class="kw">:</span></span>
@@ -191,9 +161,9 @@
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 </div>
 </div>
-<div id="styling" class="section level2">
-<h2 class="hasAnchor">
-<a href="#styling" class="anchor"></a>Styling</h2>
+<div class="section level2">
+<h2 id="styling">Styling<a class="anchor" aria-label="anchor" href="#styling"></a>
+</h2>
 <p>You may wish to style the aesthetics and text of the password landing page to your own preferences. This can be done simply by passing the <code><a href="reference/stylize.html">stylize()</a></code> function to the <code>style</code> argument, or by specifying <code>style</code> arguments directly in the YAML frontmatter.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/charm.html">charm</a></span><span class="op">(</span><span class="st">"index.Rmd"</span>, style <span class="op">=</span> <span class="fu"><a href="reference/stylize.html">stylize</a></span><span class="op">(</span>button_text <span class="op">=</span> <span class="st">"Open Sesame!"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -206,9 +176,9 @@
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>See <code><a href="reference/stylize.html">?fidelius::stylize</a></code> to find out more about which aspects of the landing page can be styled.</p>
 </div>
-<div id="password-hint" class="section level2">
-<h2 class="hasAnchor">
-<a href="#password-hint" class="anchor"></a>Password Hint</h2>
+<div class="section level2">
+<h2 id="password-hint">Password Hint<a class="anchor" aria-label="anchor" href="#password-hint"></a>
+</h2>
 <p>Optionally, you may wish to provide a helpful hint for anyone (or yourself) trying to remember the password and gain access to the document. You can do this by passing a string to the <code>hint</code> argument:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/charm.html">charm</a></span><span class="op">(</span><span class="st">"index.Rmd"</span>, password <span class="op">=</span> <span class="st">"pw1234!"</span>, hint <span class="op">=</span> <span class="st">"A very bad password!"</span><span class="op">)</span></code></pre></div>
@@ -220,80 +190,85 @@
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">password</span><span class="kw">:</span><span class="at"> </span><span class="st">"pw1234!"</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">hint</span><span class="kw">:</span><span class="at"> </span><span class="st">"A very bad password!"</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>Providing a <code>hint</code> will include the lightweight <a href="https://github.com/ghosh/Micromodal"><code>Micromodal</code></a> JavaScript library to provide a simple modal pop-up that contains your password hint.</p>
+<p>Providing a <code>hint</code> will include the lightweight <a href="https://github.com/ghosh/Micromodal" class="external-link"><code>Micromodal</code></a> JavaScript library to provide a simple modal pop-up that contains your password hint.</p>
 </div>
-<div id="portability" class="section level2">
-<h2 class="hasAnchor">
-<a href="#portability" class="anchor"></a>Portability</h2>
+<div class="section level2">
+<h2 id="portability">Portability<a class="anchor" aria-label="anchor" href="#portability"></a>
+</h2>
 <p>You may specify <code>bundle = TRUE</code> (or <code>bundle: true</code>) to bundle all of the <code>fidelius</code> dependencies for offline use. If the <code>input</code> file (or <code>output_format</code>) is also self-contained (such as with <code>self_contained = TRUE</code>), the <code>fidelius</code> HTML document is entirely self-contained and can easily be shared with others (e.g. via email) as a standalone document. See <code><a href="reference/charm.html">?charm</a></code> for more details.</p>
 </div>
-<div id="password-manager" class="section level2">
-<h2 class="hasAnchor">
-<a href="#password-manager" class="anchor"></a>Password Manager</h2>
-<p>I have tried to make sure that <code>fidelius</code> is compatible with common password management tools (e.g. 1Pass, LastPass, etc.). If your password manager is not detecting the password field on the <code>fidelius</code> landing page, please <a href="https://github.com/mattwarkentin/fidelius/issues">file an issue</a> that includes which browser and password manager you use, and I will work to support it.</p>
+<div class="section level2">
+<h2 id="password-manager">Password Manager<a class="anchor" aria-label="anchor" href="#password-manager"></a>
+</h2>
+<p>I have tried to make sure that <code>fidelius</code> is compatible with common password management tools (e.g. 1Pass, LastPass, etc.). If your password manager is not detecting the password field on the <code>fidelius</code> landing page, please <a href="https://github.com/mattwarkentin/fidelius/issues" class="external-link">file an issue</a> that includes which browser and password manager you use, and I will work to support it.</p>
 </div>
-<div id="code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
-<p>Please note that the fidelius project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
+<p>Please note that the fidelius project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="links">
-<h2>Links</h2>
+  <div class="col-md-3" id="pkgdown-sidebar">
+<div class="links">
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/mattwarkentin/fidelius/">https://​github.com/​mattwarkentin/​fidelius/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/mattwarkentin/fidelius/issues">https://​github.com/​mattwarkentin/​fidelius/​issues</a>
-</li>
+<li><a href="https://github.com/mattwarkentin/fidelius/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/mattwarkentin/fidelius/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Matthew T. Warkentin <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8730-3511" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Matthew T. Warkentin <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8730-3511" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://github.com/mattwarkentin/fidelius/actions"><img src="https://github.com/mattwarkentin/fidelius/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://github.com/mattwarkentin/fidelius/actions" class="external-link"><img src="https://github.com/mattwarkentin/fidelius/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
-</div>
-</div>
 
-
-      <footer><div class="copyright">
-  <p>Developed by Matthew T. Warkentin.</p>
+  </div>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by Matthew T. Warkentin.</p>
 </div>
 
-      </footer>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+</div>
+
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>

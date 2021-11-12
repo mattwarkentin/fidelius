@@ -1,11 +1,13 @@
 #!/usr/local/bin/Rscript --vanilla
 
+build_examples <- FALSE
+
 if (fs::dir_exists(here::here('docs/articles/examples'))) {
   fs::dir_delete(here::here('docs/articles/examples'))
 }
 
 pkgdown::clean_site()
-pkgdown::build_site()
+pkgdown::build_site(preview = FALSE)
 
 examples <- fs::dir_ls(
   path = here::here('inst/examples'),
@@ -14,10 +16,12 @@ examples <- fs::dir_ls(
   type = "file"
 )
 
-purrr::walk(
-  .x = examples,
-  .f = rmarkdown::render
-)
+if (build_examples) {
+  purrr::walk(
+    .x = examples,
+    .f = rmarkdown::render
+  )
+}
 
 if (!fs::dir_exists(here::here('docs/'))) {
   rlang::abort('No `pkgdown` website found.')
