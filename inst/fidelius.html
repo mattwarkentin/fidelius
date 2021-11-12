@@ -50,7 +50,17 @@
         -webkit-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1);
         box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1);
         border-radius: 10px;
-        min-width: 500px;
+        min-width: 480px;
+      }
+      @media (max-width:480px) {
+        .fidelius__main {
+          min-width: 375px;
+        }
+      }
+      @media (max-width:375px) {
+        .fidelius__main {
+          min-width: 315px;
+        }
       }
       .fidelius__content {
         padding: 24px 28px;
@@ -237,8 +247,13 @@
         }
 
         let showpass = document.querySelector('.fidelius__eye')
-        showpass.addEventListener('click', toggle_password_show)
-        showpass.addEventListener('touchend', toggle_password_show)
+        ;['click', 'touchend'].forEach(function(ev) {
+          showpass.addEventListener(ev, (ev) => {
+            ev.stopPropagation()
+            ev.preventDefault()
+            toggle_password_show()
+          })
+        })
 
         function decrypter () {
           // Get the password and hash it
@@ -267,8 +282,10 @@
           }
         }
 
-        submit_btn.addEventListener('click', decrypter)
-        submit_btn.addEventListener('touchend', decrypter)
+        ;['click', 'touchend'].forEach(function(ev) {
+          submit_btn.addEventListener(ev, decrypter)
+        })
+
         document.addEventListener('keyup', (e) => {
           if (e.keyCode === 13) {
             decrypter()
