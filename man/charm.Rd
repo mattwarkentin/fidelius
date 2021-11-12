@@ -48,5 +48,5 @@ decryption machinery and dependencies for the document generated
 by \code{charm()}. It is still the users responsibility to decide on whether
 \code{input} is self-contained by passing \code{self_contained = TRUE} to
 \code{rmarkdown::render()} using \code{...}, or by specifying
-\code{self_contained = TRUE} in the YAML header of \code{input}.
+\code{self_contained: true} in the YAML header of \code{input}.
 }

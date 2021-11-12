@@ -1,6 +1,6 @@
-#' Stylize Password Page
+#' Style password landing page
 #'
-#' @description Use this to style the appearance of the landing
+#' @description Use this function to style the appearance of the landing
 #'   page for the password-protected HTML file.
 #'
 #' @param header_text Header text.

@@ -20,7 +20,7 @@
 #'   by `charm()`. It is still the users responsibility to decide on whether
 #'   `input` is self-contained by passing `self_contained = TRUE` to
 #'   `rmarkdown::render()` using `...`, or by specifying
-#'   `self_contained = TRUE` in the YAML header of `input`.
+#'   `self_contained: true` in the YAML header of `input`.
 #'
 #' @return `input`, invisibly.
 #'

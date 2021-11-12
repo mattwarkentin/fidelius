@@ -2,7 +2,7 @@
 % Please edit documentation in R/stylize.R
 \name{stylize}
 \alias{stylize}
-\title{Stylize Password Page}
+\title{Style password landing page}
 \usage{
 stylize(
   header_text = "PLEASE ENTER THE PASSWORD",
@@ -57,7 +57,7 @@ stylize(
 A list with class \code{fidelius_styling}.
 }
 \description{
-Use this to style the appearance of the landing
+Use this function to style the appearance of the landing
 page for the password-protected HTML file.
 }
 \examples{
