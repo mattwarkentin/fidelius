@@ -1,3 +1,4 @@
 name: Password Protected HTML Document
 description: >
  Encrypted and password-protected HTML document
+create_dir: false
