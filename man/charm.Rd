@@ -2,7 +2,7 @@
 % Please edit documentation in R/charm.R
 \name{charm}
 \alias{charm}
-\title{Password Protected HTML Documents}
+\title{Password protect a document}
 \usage{
 charm(
   input,

@@ -84,8 +84,8 @@ To render to a different format, specify the `output_format` (you may pass any a
 output:
   fidelius::html_password_protected:
     output_format: 
-      distill::distill_article
-        self_contained: true
+      rmarkdown::html_document:
+        toc: true
 ---
 ```
 
@@ -100,7 +100,7 @@ You may include the `password` directly in the YAML frontmatter, but be sure not
 output:
   fidelius::html_password_protected:
     password: "pw1234!"
-    output_format: distill::distill_article
+    output_format: rmarkdown::html_document
 ---
 ```
 

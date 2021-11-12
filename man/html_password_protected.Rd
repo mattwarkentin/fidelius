@@ -2,7 +2,7 @@
 % Please edit documentation in R/html_password_protected.Rmd.R
 \name{html_password_protected}
 \alias{html_password_protected}
-\title{Password Protected HTML Document}
+\title{Password protected HTML document}
 \usage{
 html_password_protected(
   output_format = "rmarkdown::html_document",
@@ -17,7 +17,15 @@ html_password_protected(
 }
 \arguments{
 \item{output_format}{An R Markdown format that renders to HTML. By default,
-will render to the standard \code{rmarkdown::html_document()} format.}
+will render to the standard \code{rmarkdown::html_document()} format. You
+may pass any arguments to your \code{output_format} as shown below:\preformatted{---
+output:
+  fidelius::html_password_protected:
+    output_format:
+      rmarkdown::html_document:
+        toc: true
+---
+}}
 
 \item{password}{Private password to unlock file. If not provided, you will
 be asked to supply a password by a prompt if you are working from an
@@ -49,13 +57,12 @@ R Markdown output format based on \code{output_format} to pass to
 \code{rmarkdown::render()}.
 }
 \description{
-An R Markdown document format to encrypt and password protect an HTML
+An R Markdown output format to encrypt and password protect an HTML
 document using \code{charm()}.
 }
 \note{
-Using \code{html_password_protected} format requires you to hard-code your
-\code{password} into the YAML header of the document. As such, the
-R Markdown file should never be checked into a public version control
+If you hard-code your \code{password} into the YAML header of the document be
+careful not to check the R Markdown file into a public version control
 repository (e.g. git or GitHub) where the password is stored and visible
 in plain-text. Please use this format carefully.
 

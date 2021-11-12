@@ -1,4 +1,4 @@
-#' Password Protected HTML Documents
+#' Password protect a document
 #'
 #' Encrypt and password protect an HTML document.
 #'

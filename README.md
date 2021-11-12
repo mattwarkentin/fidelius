@@ -122,8 +122,8 @@ normally would):
 output:
   fidelius::html_password_protected:
     output_format: 
-      distill::distill_article
-        self_contained: true
+      rmarkdown::html_document:
+        toc: true
 ---
 ```
 
@@ -148,7 +148,7 @@ password will be visible in plain-text.
 output:
   fidelius::html_password_protected:
     password: "pw1234!"
-    output_format: distill::distill_article
+    output_format: rmarkdown::html_document
 ---
 ```
 

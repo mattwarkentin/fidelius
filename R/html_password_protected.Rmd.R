@@ -1,10 +1,22 @@
-#' Password Protected HTML Document
+#' Password protected HTML document
 #'
-#' An R Markdown document format to encrypt and password protect an HTML
-#' document using `charm()`.
+#' An R Markdown output format to encrypt and password protect an HTML
+#'   document using `charm()`.
 #'
 #' @param output_format An R Markdown format that renders to HTML. By default,
-#'   will render to the standard `rmarkdown::html_document()` format.
+#'   will render to the standard `rmarkdown::html_document()` format. You
+#'   may pass any arguments to your `output_format` as shown below:
+#'
+#'   ```
+#'   ---
+#'   output:
+#'     fidelius::html_password_protected:
+#'       output_format:
+#'         rmarkdown::html_document:
+#'           toc: true
+#'   ---
+#'   ```
+#'
 #' @param style Any number of style options that are configurable via
 #'   `stylize()`. For example:
 #'
@@ -24,9 +36,8 @@
 #'
 #' @note
 #'
-#' Using `html_password_protected` format requires you to hard-code your
-#'   `password` into the YAML header of the document. As such, the
-#'   R Markdown file should never be checked into a public version control
+#' If you hard-code your `password` into the YAML header of the document be
+#'   careful not to check the R Markdown file into a public version control
 #'   repository (e.g. git or GitHub) where the password is stored and visible
 #'   in plain-text. Please use this format carefully.
 #'
