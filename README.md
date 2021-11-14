@@ -15,7 +15,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 The goal of `fidelius` is to provide a simple interface for encrypting
 and password-protecting your static HTML files, and supporting secure
-and (optionally) self-contained in-browser decryption.
+and (optionally) self-contained in-browser authentication and
+decryption.
 
 This package sits on the shoulders of the cryptography library,
 [`sodium`](https://doc.libsodium.org/), to provide secure methods for
@@ -64,10 +65,10 @@ In both cases, the desired HTML document format is rendered and then
 securely encrypted using `sodium::data_encrypt()`, based on the
 user-provided `password` and a nonce. The `output` file is an HTML
 document that contains the encrypted content, the nonce, and the
-machinery to perform secure in-browser decryption. The correct password
-is required for decryption and to reveal the hidden content. The output
-file can be hosted on any static site hosting service (e.g. GitHub
-Pages) for browser-side password-protection and decryption.
+machinery to perform secure in-browser authentication and decryption.
+The correct password is required to reveal the hidden content. The
+output file can be hosted on any static site hosting service
+(e.g. GitHub Pages) for browser-side password-protection.
 
 By default, the name of the output file is the name of the input file
 with an HTML extension, but this can be configured using the `output`
@@ -127,12 +128,10 @@ output:
 ---
 ```
 
-`fidelius` works nicely with many existing HTML output formats,
-including those offered by the
-[`{rmdformats}`](https://github.com/juba/rmdformats) and
-[`{cleanrmd}`](https://github.com/gadenbuie/cleanrmd) packages. At the
-moment, `{bookdown}` formats are not supported due to their unique
-rendering process (this may change in the future).
+`fidelius` is compatible with most existing HTML output formats. See
+website for examples. At the moment, `{bookdown}` formats are not
+supported due to their unique rendering process (this may change in the
+future).
 
 In both of the above examples, if you try to render the document by
 using the “Knit” button in RStudio or using `rmarkdown::render()` in an

@@ -6,7 +6,9 @@
 \alias{fidelius-package}
 \title{fidelius: Browser-Side Password-Protected HTML Documents}
 \description{
-This package provides a simple interface to create secure, encrypted, and password-protected static HTML documents that include the necessary machinery for secure in-browser decryption.
+This package provides a simple interface to create
+  secure, encrypted, and password-protected static HTML documents that 
+  include the necessary machinery for secure in-browser decryption.
 }
 \seealso{
 Useful links:

@@ -2,9 +2,21 @@
 % Please edit documentation in R/html_password_protected.Rmd.R
 \name{html_password_protected}
 \alias{html_password_protected}
+\alias{secret_keeper}
 \title{Password protected HTML document}
 \usage{
 html_password_protected(
+  output_format = "rmarkdown::html_document",
+  password,
+  hint = NULL,
+  style = list(),
+  bundle = FALSE,
+  minified = TRUE,
+  preview = FALSE,
+  ...
+)
+
+secret_keeper(
   output_format = "rmarkdown::html_document",
   password,
   hint = NULL,
@@ -58,7 +70,8 @@ R Markdown output format based on \code{output_format} to pass to
 }
 \description{
 An R Markdown output format to encrypt and password protect an HTML
-document using \code{charm()}.
+document using \code{charm()}. \code{secret_keeper()} is an alias for
+\code{html_password_protected}.
 }
 \note{
 If you hard-code your \code{password} into the YAML header of the document be

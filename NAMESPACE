@@ -2,4 +2,5 @@
 
 export(charm)
 export(html_password_protected)
+export(secret_keeper)
 export(stylize)

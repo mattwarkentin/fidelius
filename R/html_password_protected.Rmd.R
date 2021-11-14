@@ -1,7 +1,8 @@
 #' Password protected HTML document
 #'
 #' An R Markdown output format to encrypt and password protect an HTML
-#'   document using `charm()`.
+#'   document using `charm()`. `secret_keeper()` is an alias for
+#'   `html_password_protected`.
 #'
 #' @param output_format An R Markdown format that renders to HTML. By default,
 #'   will render to the standard `rmarkdown::html_document()` format. You
@@ -109,3 +110,7 @@ html_password_protected <- function(
   }
   format
 }
+
+#' @rdname html_password_protected
+#' @export
+secret_keeper <- html_password_protected
