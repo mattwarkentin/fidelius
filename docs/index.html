@@ -29,7 +29,7 @@
     <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
     <a class="navbar-brand me-2" href="index.html">fidelius</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.2</small>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -91,7 +91,7 @@
 <blockquote>
 <p>“An immensely complex spell involving the magical concealment of a secret inside a single, living soul. The information is hidden inside the chosen person, or Secret-Keeper, and is henceforth impossible to find - unless, of course, the Secret-Keeper chooses to divulge it.”</p>
 </blockquote>
-<p>The goal of <code>fidelius</code> is to provide a simple interface for encrypting and password-protecting your static HTML files, and supporting secure and (optionally) self-contained in-browser decryption.</p>
+<p>The goal of <code>fidelius</code> is to provide a simple interface for encrypting and password-protecting your static HTML files, and supporting secure and (optionally) self-contained in-browser authentication and decryption.</p>
 <p>This package sits on the shoulders of the cryptography library, <a href="https://doc.libsodium.org/" class="external-link"><code>sodium</code></a>, to provide secure methods for encryption, decryption, and password hashing - both by it’s <code>R</code> interface via <a href="https://github.com/jeroen/sodium" class="external-link"><code>{sodium}</code></a> and its <a href="https://github.com/jedisct1/libsodium.js" class="external-link">JavaScript API</a> for in-browser decryption.</p>
 <p>This package drew inspiration from the <a href="https://github.com/robinmoisson/staticrypt" class="external-link"><code>staticrypt</code></a>, <a href="https://github.com/favstats/rmdprotectr" class="external-link"><code>rmdprotectr</code></a>, and <a href="https://github.com/dirkschumacher/encryptedRmd" class="external-link"><code>encryptedRmd</code></a> projects.</p>
 <div class="section level2">
@@ -112,7 +112,7 @@
 <li><p><a href="#charm"><code>charm()</code></a> - Use this function to render an existing R Markdown or HTML document into a <code>fidelius</code> password-protected HTML document.</p></li>
 <li><p><a href="#html_password_protected"><code>html_password_protected()</code></a> - An R Markdown <code>output</code> format that can be used directly in the YAML frontmatter to create password-protected files rendered to other HTML formats.</p></li>
 </ol>
-<p>In both cases, the desired HTML document format is rendered and then securely encrypted using <code><a href="https://rdrr.io/pkg/sodium/man/symmetric.html" class="external-link">sodium::data_encrypt()</a></code>, based on the user-provided <code>password</code> and a nonce. The <code>output</code> file is an HTML document that contains the encrypted content, the nonce, and the machinery to perform secure in-browser decryption. The correct password is required for decryption and to reveal the hidden content. The output file can be hosted on any static site hosting service (e.g. GitHub Pages) for browser-side password-protection and decryption.</p>
+<p>In both cases, the desired HTML document format is rendered and then securely encrypted using <code><a href="https://rdrr.io/pkg/sodium/man/symmetric.html" class="external-link">sodium::data_encrypt()</a></code>, based on the user-provided <code>password</code> and a nonce. The <code>output</code> file is an HTML document that contains the encrypted content, the nonce, and the machinery to perform secure in-browser authentication and decryption. The correct password is required to reveal the hidden content. The output file can be hosted on any static site hosting service (e.g. GitHub Pages) for browser-side password-protection.</p>
 <p>By default, the name of the output file is the name of the input file with an HTML extension, but this can be configured using the <code>output</code> argument.</p>
 <div class="section level3">
 <h3 id="charm">
@@ -143,7 +143,7 @@
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">      rmarkdown:</span><span class="fu">:html_document</span><span class="kw">:</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p><code>fidelius</code> works nicely with many existing HTML output formats, including those offered by the <a href="https://github.com/juba/rmdformats" class="external-link"><code>{rmdformats}</code></a> and <a href="https://github.com/gadenbuie/cleanrmd" class="external-link"><code>{cleanrmd}</code></a> packages. At the moment, <a href="https://github.com/rstudio/bookdown" class="external-link">bookdown</a> formats are not supported due to their unique rendering process (this may change in the future).</p>
+<p><code>fidelius</code> is compatible with most existing HTML output formats. See website for examples. At the moment, <a href="https://github.com/rstudio/bookdown" class="external-link">bookdown</a> formats are not supported due to their unique rendering process (this may change in the future).</p>
 <p>In both of the above examples, if you try to render the document by using the “Knit” button in RStudio or using <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code> in an interactive session, you will be prompted to supply a <code>password</code>. In a non-interactive session, the rendering will fail.</p>
 <p>You may include the <code>password</code> directly in the YAML frontmatter, but be sure not to store the R Markdown file in a public repository as the password will be visible in plain-text.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>

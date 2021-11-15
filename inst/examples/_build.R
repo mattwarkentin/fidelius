@@ -1,6 +1,6 @@
 #!/usr/local/bin/Rscript --vanilla
 
-build_examples <- TRUE
+build_examples <- FALSE
 
 if (fs::dir_exists(here::here('docs/articles/examples'))) {
   fs::dir_delete(here::here('docs/articles/examples'))
