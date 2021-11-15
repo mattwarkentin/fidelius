@@ -8,3 +8,4 @@ docs/
 _pkgdown.yml
 inst/examples
 ^cran-comments\.md$
+^CRAN-RELEASE$
