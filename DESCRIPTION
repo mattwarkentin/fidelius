@@ -4,12 +4,12 @@ Version: 0.0.2
 Authors@R: 
     person(given = "Matthew T.",
            family = "Warkentin",
-           role = c("aut", "cre"),
+           role = c("aut", "cre", "cph"),
            email = "warkentin@lunenfeld.ca",
            comment = c(ORCID = "0000-0001-8730-3511"))
-Description: This package provides a simple interface to create
-  secure, encrypted, and password-protected static HTML documents that 
-  include the necessary machinery for secure in-browser decryption.
+Description: Create secure, encrypted, and password-protected static HTML 
+  documents that include the machinery for secure in-browser authentication 
+  and decryption.
 License: MIT + file LICENSE
 URL: https://mattwarkentin.github.io/fidelius/, 
   https://github.com/mattwarkentin/fidelius

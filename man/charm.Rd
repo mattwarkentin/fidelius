@@ -50,3 +50,11 @@ by \code{charm()}. It is still the users responsibility to decide on whether
 \code{rmarkdown::render()} using \code{...}, or by specifying
 \code{self_contained: true} in the YAML header of \code{input}.
 }
+\examples{
+\dontrun{
+charm("input.Rmd")
+
+charm("input.Rmd", password = "pw1234!")
+}
+
+}

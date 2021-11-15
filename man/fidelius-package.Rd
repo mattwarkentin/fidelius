@@ -6,7 +6,7 @@
 \alias{fidelius-package}
 \title{fidelius: Browser-Side Password-Protected HTML Documents}
 \description{
-This package provides a simple interface to create secure, encrypted, and password-protected static HTML documents that include the necessary machinery for secure in-browser decryption.
+Create secure, encrypted, and password-protected static HTML documents that include the machinery for secure in-browser authentication and decryption.
 }
 \seealso{
 Useful links:
@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Matthew T. Warkentin \email{warkentin@lunenfeld.ca} (\href{https://orcid.org/0000-0001-8730-3511}{ORCID})
+\strong{Maintainer}: Matthew T. Warkentin \email{warkentin@lunenfeld.ca} (\href{https://orcid.org/0000-0001-8730-3511}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}

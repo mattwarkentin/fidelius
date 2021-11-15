@@ -58,6 +58,12 @@
 #' R Markdown output format based on `output_format` to pass to
 #'   `rmarkdown::render()`.
 #'
+#' @examples
+#' \dontrun{
+#' library(rmarkdown)
+#' render("input.Rmd", html_password_protected())
+#' }
+#'
 #' @export
 
 html_password_protected <- function(

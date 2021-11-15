@@ -85,6 +85,13 @@ you are done developing your document, set \code{preview = FALSE} or remove it
 from the YAML header entirely to encrypt and password protect your
 document.
 }
+\examples{
+\dontrun{
+library(rmarkdown)
+render("input.Rmd", html_password_protected())
+}
+
+}
 \seealso{
 \code{\link{charm}} for more information on the password protection and
 encryption.

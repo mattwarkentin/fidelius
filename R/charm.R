@@ -24,6 +24,13 @@
 #'
 #' @return `input`, invisibly.
 #'
+#' @examples
+#' \dontrun{
+#' charm("input.Rmd")
+#'
+#' charm("input.Rmd", password = "pw1234!")
+#' }
+#'
 #' @export
 
 charm <- function(

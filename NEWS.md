@@ -4,7 +4,7 @@
 
 * General improvements to mobile experience
 
-* Added `secret_keeper()` as an alias for `html_password_protected`
+* Added `secret_keeper()` as an alias for `html_password_protected()`
 
 # fidelius 0.0.1
 

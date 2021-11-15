@@ -33,8 +33,13 @@ projects.
 
 ## Installation
 
-Currently, you can only install the development version of this package
-from GitHub by running the following command:
+You can install the released version of fidelius from CRAN with:
+
+``` r
+install.packages('fidelius')
+```
+
+You can install the development version of fidelius from GitHub with:
 
 ``` r
 remotes::install_github("mattwarkentin/fidelius")
