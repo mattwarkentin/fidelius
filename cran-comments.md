@@ -5,7 +5,7 @@
 * local macOS install, R 4.0.5
 * macOS (on github actions), release
 * windows (on github actions), release
-* ubuntu (on github actions), release, devel
+* ubuntu (on github actions), release, devel, oldrel-1
 
 ## R CMD check results
 
@@ -15,4 +15,4 @@
 
 ## Reverse dependencies
 
-This package currently has no reverse dependencies.
+This package has no reverse dependencies.
