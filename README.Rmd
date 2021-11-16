@@ -12,7 +12,8 @@ knitr::opts_chunk$set(
 # fidelius
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![CRAN status](https://www.r-pkg.org/badges/version/fidelius)](https://CRAN.R-project.org/package=fidelius)
 [![R-CMD-check](https://github.com/mattwarkentin/fidelius/workflows/R-CMD-check/badge.svg)](https://github.com/mattwarkentin/fidelius/actions)
 <!-- badges: end -->
 
