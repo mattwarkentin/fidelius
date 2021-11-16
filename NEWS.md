@@ -1,3 +1,5 @@
+# fidelius (development version)
+
 # fidelius 0.0.2
 
 * R Markdown template file no long creates a new directory
